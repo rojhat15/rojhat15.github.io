@@ -1,0 +1,12 @@
+---
+import { profile } from "../data/profile";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section class="section-shell content-section" id="tools">
+  <SectionHeading eyebrow="Toolbox" title="Tools & Skills" />
+
+  <ul class="tools-grid" aria-label="Tools and skills">
+    {profile.tools.map((tool) => <li>{tool}</li>)}
+  </ul>
+</section>

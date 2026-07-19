@@ -1,0 +1,14 @@
+---
+import { profile } from "../data/profile";
+---
+
+<dl class="stats-grid" aria-label="Career statistics">
+  {
+    profile.stats.map((stat) => (
+      <div class="stat-item">
+        <dt>{stat.value}</dt>
+        <dd>{stat.label}</dd>
+      </div>
+    ))
+  }
+</dl>

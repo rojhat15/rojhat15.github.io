@@ -1,0 +1,28 @@
+---
+import { profile } from "../data/profile";
+---
+
+<aside class="profile-card" aria-label="Profile summary">
+  <div class="profile-visual" aria-hidden="true">
+    <div class="profile-portrait">
+      <span class="portrait-node node-a"></span>
+      <span class="portrait-node node-b"></span>
+      <span class="portrait-node node-c"></span>
+      <span class="portrait-line line-a"></span>
+      <span class="portrait-line line-b"></span>
+      <span class="portrait-line line-c"></span>
+      <span class="portrait-initials">RY</span>
+    </div>
+  </div>
+
+  <div class="profile-card__body">
+    <h2>{profile.name}</h2>
+    <p>{profile.intro}</p>
+  </div>
+
+  <div class="profile-links" aria-label="Profile links">
+    <a href="#projects">Work</a>
+    <a href="#tools">Tools</a>
+    <a href="#contact">Contact</a>
+  </div>
+</aside>

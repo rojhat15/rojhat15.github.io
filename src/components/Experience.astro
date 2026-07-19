@@ -1,0 +1,19 @@
+---
+import { profile } from "../data/profile";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section class="section-shell content-section" id="experience">
+  <SectionHeading eyebrow="Approach" title="Experience" />
+
+  <div class="timeline-list">
+    {
+      profile.experience.map((item) => (
+        <article class="timeline-item">
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
