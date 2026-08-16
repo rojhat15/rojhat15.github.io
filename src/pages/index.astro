@@ -3,6 +3,7 @@ import Contact from "../components/Contact.astro";
 import Experience from "../components/Experience.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import ProfileCard from "../components/ProfileCard.astro";
 import Projects from "../components/Projects.astro";
 import Tools from "../components/Tools.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -14,11 +15,17 @@ import { profile } from "../data/profile";
   description={profile.intro}
 >
   <Header />
-  <main>
-    <Hero />
-    <Projects />
-    <Experience />
-    <Tools />
-    <Contact />
+  <main class="portfolio-layout">
+    <div class="profile-column">
+      <ProfileCard />
+    </div>
+
+    <div class="content-column">
+      <Hero />
+      <Projects />
+      <Experience />
+      <Tools />
+      <Contact />
+    </div>
   </main>
 </BaseLayout>

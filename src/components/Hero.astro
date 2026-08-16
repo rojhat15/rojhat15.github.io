@@ -1,31 +1,26 @@
 ---
 import { profile } from "../data/profile";
-import ProfileCard from "./ProfileCard.astro";
 import Stats from "./Stats.astro";
 ---
 
-<section class="hero-section section-shell" id="home">
-  <div class="hero-grid">
-    <ProfileCard />
+<section class="hero-section" id="home">
+  <div class="hero-content">
+    <h1>
+      <span>Data</span>
+      <span>Scientist</span>
+    </h1>
+    <p class="hero-headline">{profile.headline}</p>
+    <Stats />
 
-    <div class="hero-content">
-      <h1>
-        <span>Data</span>
-        <span>Scientist</span>
-      </h1>
-      <p class="hero-headline">{profile.headline}</p>
-      <Stats />
-
-      <div class="focus-grid" aria-label="Focus areas">
-        <article class="focus-card focus-card--orange">
-          <span class="focus-card__label">Core focus</span>
-          <h2>Curiosity, analysis and practical impact</h2>
-        </article>
-        <article class="focus-card focus-card--green">
-          <span class="focus-card__label">Working with</span>
-          <h2>{profile.focusAreas.join(", ")}</h2>
-        </article>
-      </div>
+    <div class="focus-grid" aria-label="Focus areas">
+      <article class="focus-card focus-card--orange">
+        <span class="focus-card__label">Core focus</span>
+        <h2>Curiosity, analysis and practical impact</h2>
+      </article>
+      <article class="focus-card focus-card--green">
+        <span class="focus-card__label">Working with</span>
+        <h2>{profile.focusAreas.join(", ")}</h2>
+      </article>
     </div>
   </div>
 </section>

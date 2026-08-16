@@ -2,8 +2,9 @@
   color-scheme: dark;
   --bg: #11100f;
   --surface: #1b1918;
-  --surface-strong: #f7f2ec;
+  --surface-strong: #ffffff;
   --text: #fbf7f2;
+  --heading: #ffffff;
   --muted: #9c9692;
   --soft: rgba(255, 255, 255, 0.09);
   --line: rgba(255, 255, 255, 0.12);
@@ -51,7 +52,7 @@ select {
 }
 
 .site-header {
-  position: fixed;
+  position: absolute;
   top: 24px;
   left: 0;
   z-index: 10;
@@ -98,33 +99,39 @@ select {
   outline: none;
 }
 
-.section-shell {
+.portfolio-layout {
   width: min(100% - 40px, 1120px);
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
   margin: 0 auto;
+  padding-top: 112px;
+}
+
+.profile-column {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+}
+
+.content-column {
+  min-width: 0;
 }
 
 .hero-section {
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  padding: 112px 0 80px;
-}
-
-.hero-grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  gap: 88px;
-  align-items: center;
+  min-height: calc(100svh - 112px);
+  padding: 0 0 80px;
+  scroll-margin-top: 96px;
 }
 
 .profile-card {
   position: relative;
-  min-height: 432px;
+  min-height: min(620px, calc(100svh - 120px));
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: 22px;
-  padding: 18px;
+  gap: 26px;
+  padding: 20px;
   border-radius: var(--radius);
   background: var(--surface-strong);
   color: var(--ink);
@@ -186,7 +193,7 @@ select {
   position: relative;
   z-index: 1;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 42px;
+  font-size: 44px;
   font-weight: 900;
 }
 
@@ -263,14 +270,14 @@ select {
 .profile-card h2 {
   margin: 0;
   color: var(--ink);
-  font-size: 28px;
+  font-size: 30px;
   line-height: 1.05;
 }
 
 .profile-card p:not(.eyebrow) {
   margin: 12px 0 0;
   color: #6d625b;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.35;
 }
 
@@ -297,7 +304,8 @@ select {
 
 .hero-content h1 {
   margin: 0;
-  font-size: 86px;
+  color: var(--heading);
+  font-size: 90px;
   font-weight: 900;
   line-height: 0.9;
   text-transform: uppercase;
@@ -315,7 +323,7 @@ select {
   width: min(100%, 640px);
   margin: 24px 0 0;
   color: var(--muted);
-  font-size: 17px;
+  font-size: 18px;
 }
 
 .stats-grid {
@@ -331,8 +339,8 @@ select {
 }
 
 .stat-item dt {
-  color: var(--text);
-  font-size: 42px;
+  color: var(--heading);
+  font-size: 46px;
   font-weight: 900;
   line-height: 1;
 }
@@ -341,7 +349,7 @@ select {
   max-width: 112px;
   margin: 8px 0 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   line-height: 1.1;
   text-transform: uppercase;
@@ -391,27 +399,33 @@ select {
 .focus-card h2 {
   max-width: 260px;
   margin: 0;
-  font-size: 20px;
+  font-size: 21px;
   line-height: 1.08;
   text-transform: uppercase;
 }
 
 .content-section {
   padding: 84px 0;
+  scroll-margin-top: 96px;
 }
 
 .section-heading {
-  display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
-  gap: 48px;
-  align-items: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 28px;
+  text-align: center;
+}
+
+.section-heading .eyebrow {
+  margin: 0;
 }
 
 .section-heading h2 {
   margin: 0;
-  color: var(--text);
-  font-size: 52px;
+  color: var(--heading);
+  font-size: 56px;
   line-height: 0.95;
   text-transform: uppercase;
 }
@@ -441,8 +455,8 @@ select {
 .project-card h3,
 .timeline-item h3 {
   margin: 10px 0 0;
-  color: var(--text);
-  font-size: 22px;
+  color: var(--heading);
+  font-size: 24px;
   line-height: 1.1;
 }
 
@@ -451,7 +465,7 @@ select {
 .contact-panel p {
   margin: 18px 0 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .timeline-list {
@@ -488,8 +502,8 @@ select {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.045);
-  color: var(--text);
-  font-size: 18px;
+  color: var(--heading);
+  font-size: 20px;
   font-weight: 800;
 }
 
@@ -516,7 +530,7 @@ select {
 .contact-panel p {
   max-width: 620px;
   margin: 0;
-  font-size: 18px;
+  font-size: 19px;
 }
 
 .contact-link {
@@ -545,23 +559,25 @@ select {
     font-size: 12px;
   }
 
-  .section-shell {
+  .portfolio-layout {
     width: min(100% - 28px, 640px);
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 84px;
+  }
+
+  .profile-column {
+    position: static;
   }
 
   .hero-section {
     min-height: auto;
-    padding: 84px 0 48px;
-  }
-
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    padding: 0 0 48px;
   }
 
   .profile-card {
-    width: min(100%, 340px);
-    min-height: 0;
+    width: min(100%, 380px);
+    min-height: 560px;
     margin: 0 auto;
   }
 
@@ -570,13 +586,13 @@ select {
   }
 
   .hero-content h1 {
-    font-size: 52px;
+    font-size: 54px;
   }
 
   .hero-headline {
     margin-right: auto;
     margin-left: auto;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .stats-grid {
@@ -585,14 +601,14 @@ select {
   }
 
   .stat-item dt {
-    font-size: 34px;
+    font-size: 38px;
   }
 
   .stat-item dd {
     max-width: none;
     margin-right: auto;
     margin-left: auto;
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .focus-grid,
@@ -610,18 +626,13 @@ select {
     padding: 56px 0;
   }
 
-  .section-heading,
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .section-heading {
-    text-align: center;
-  }
-
   .section-heading h2 {
-    font-size: 38px;
+    font-size: 40px;
   }
 
   .project-card {
@@ -645,14 +656,18 @@ select {
   }
 
   .hero-content h1 {
-    font-size: 44px;
+    font-size: 46px;
   }
 
   .profile-card h2 {
-    font-size: 24px;
+    font-size: 26px;
+  }
+
+  .profile-card {
+    min-height: 520px;
   }
 
   .focus-card h2 {
-    font-size: 18px;
+    font-size: 19px;
   }
 }
