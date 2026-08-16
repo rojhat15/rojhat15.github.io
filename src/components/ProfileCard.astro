@@ -1,16 +1,12 @@
 ---
+import { faGithub, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import BrandIcon from "./BrandIcon.astro";
 import { profile } from "../data/profile";
 ---
 
 <aside class="profile-card" aria-label="Profile summary">
   <div class="profile-visual" aria-hidden="true">
     <div class="profile-portrait">
-      <span class="portrait-node node-a"></span>
-      <span class="portrait-node node-b"></span>
-      <span class="portrait-node node-c"></span>
-      <span class="portrait-line line-a"></span>
-      <span class="portrait-line line-b"></span>
-      <span class="portrait-line line-c"></span>
       <span class="portrait-initials">RY</span>
     </div>
   </div>
@@ -21,8 +17,23 @@ import { profile } from "../data/profile";
   </div>
 
   <div class="profile-links" aria-label="Profile links">
-    <a href="#projects">Work</a>
-    <a href="#tools">Tools</a>
-    <a href="#contact">Contact</a>
+    <a
+      href="https://www.linkedin.com/"
+      target="_blank"
+      rel="noreferrer"
+      aria-label="LinkedIn"
+      title="LinkedIn"
+    >
+      <BrandIcon icon={faLinkedinIn} size={25} />
+    </a>
+    <a
+      href="https://github.com/rojhat15"
+      target="_blank"
+      rel="noreferrer"
+      aria-label="GitHub"
+      title="GitHub"
+    >
+      <BrandIcon icon={faGithub} size={25} />
+    </a>
   </div>
 </aside>
