@@ -588,22 +588,11 @@ select {
 }
 
 .contact-panel {
-  display: grid;
-  grid-template-columns: minmax(180px, 0.75fr) minmax(0, 1.6fr);
-  align-items: start;
-  gap: 36px;
   padding: 28px;
 }
 
-.contact-panel__intro p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 18px;
-  line-height: 1.45;
-}
-
 .contact-form {
-  min-width: 0;
+  width: 100%;
   display: grid;
   gap: 18px;
 }
@@ -822,10 +811,6 @@ select {
     min-height: 210px;
   }
 
-  .contact-panel {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
 }
 
 @media (max-width: 620px) {
