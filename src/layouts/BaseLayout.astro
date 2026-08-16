@@ -20,8 +20,43 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      document.documentElement.classList.add("reveal-ready");
+    </script>
   </head>
   <body>
     <slot />
+
+    <script>
+      const revealItems = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      const showAll = () => {
+        revealItems.forEach((item) => item.classList.add("is-revealed"));
+      };
+
+      if (reducedMotion || !("IntersectionObserver" in window)) {
+        showAll();
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              entry.target.classList.add("is-revealed");
+              observer.unobserve(entry.target);
+            });
+          },
+          {
+            rootMargin: "0px 0px -35% 0px",
+            threshold: 0,
+          },
+        );
+
+        revealItems.forEach((item) => observer.observe(item));
+      }
+    </script>
   </body>
 </html>
