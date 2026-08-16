@@ -1,15 +1,30 @@
 ---
+import {
+  BriefcaseBusiness,
+  Folder,
+  House,
+  SquarePen,
+  Wrench,
+} from "@lucide/astro";
+
 const navItems = [
-  { href: "#home", label: "Home" },
-  { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
-  { href: "#tools", label: "Tools" },
-  { href: "#contact", label: "Contact" },
+  { href: "#home", label: "Home", Icon: House },
+  { href: "#projects", label: "Projects", Icon: Folder },
+  { href: "#experience", label: "Experience", Icon: BriefcaseBusiness },
+  { href: "#tools", label: "Tools", Icon: Wrench },
+  { href: "#contact", label: "Contact", Icon: SquarePen },
 ];
 ---
 
 <header class="site-header" aria-label="Primary navigation">
   <nav class="nav-pill">
-    {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+    {
+      navItems.map(({ href, label, Icon }) => (
+        <a href={href} aria-label={label}>
+          <Icon size={20} strokeWidth={2} aria-hidden="true" />
+          <span class="nav-tooltip" aria-hidden="true">{label}</span>
+        </a>
+      ))
+    }
   </nav>
 </header>

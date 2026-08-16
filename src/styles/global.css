@@ -54,7 +54,7 @@ select {
 
 .site-header {
   position: absolute;
-  top: 24px;
+  top: 30px;
   left: 0;
   z-index: 10;
   width: 100%;
@@ -65,39 +65,65 @@ select {
 }
 
 .nav-pill {
+  width: 292px;
+  height: 48px;
   display: flex;
   max-width: 100%;
-  gap: 4px;
-  overflow-x: auto;
-  padding: 6px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(20, 19, 18, 0.86);
+  align-items: center;
+  gap: 18px;
+  padding: 0 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(16px);
   pointer-events: auto;
 }
 
 .nav-pill a {
-  min-height: 34px;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 12px;
-  border-radius: 6px;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-  transition:
-    background-color 180ms ease,
-    color 180ms ease;
-  white-space: nowrap;
+  border-radius: 50%;
+  color: var(--text);
 }
 
 .nav-pill a:hover,
 .nav-pill a:focus-visible {
-  background: var(--soft);
   color: var(--text);
   outline: none;
+}
+
+.nav-pill a:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.18);
+}
+
+.nav-tooltip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -30px);
+  transition:
+    opacity 220ms ease,
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+}
+
+.nav-pill a:hover .nav-tooltip,
+.nav-pill a:focus-visible .nav-tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .portfolio-layout {
@@ -537,21 +563,15 @@ select {
 
 @media (max-width: 860px) {
   .site-header {
-    top: 12px;
+    top: 20px;
     padding: 0 8px;
-  }
-
-  .nav-pill a {
-    min-height: 30px;
-    padding: 0 9px;
-    font-size: 12px;
   }
 
   .portfolio-layout {
     width: min(100% - 28px, 640px);
     grid-template-columns: 1fr;
     gap: 28px;
-    padding-top: 84px;
+    padding-top: 98px;
   }
 
   .profile-column {
@@ -639,10 +659,6 @@ select {
 }
 
 @media (max-width: 420px) {
-  .nav-pill {
-    justify-content: flex-start;
-  }
-
   .hero-content h1 {
     font-size: 46px;
   }
