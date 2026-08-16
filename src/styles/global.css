@@ -154,7 +154,7 @@ select {
 
 .profile-card {
   position: relative;
-  min-height: min(700px, calc(100svh - 120px));
+  min-height: min(660px, calc(100svh - 120px));
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -640,7 +640,7 @@ select {
 
   .profile-card {
     width: min(100%, 380px);
-    min-height: 620px;
+    min-height: 590px;
     margin: 0 auto;
   }
 
@@ -723,7 +723,7 @@ select {
   }
 
   .profile-card {
-    min-height: 560px;
+    min-height: 540px;
   }
 
   .profile-card p:not(.eyebrow) {
