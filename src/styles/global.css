@@ -319,9 +319,9 @@ select {
 .hero-content h1 {
   margin: 0;
   color: var(--heading);
-  font-size: 90px;
+  font-size: 94px;
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -354,7 +354,7 @@ select {
 
 .stat-item dt {
   color: var(--heading);
-  font-size: 46px;
+  font-size: 54px;
   font-weight: 900;
   line-height: 1;
 }
@@ -363,7 +363,7 @@ select {
   max-width: 112px;
   margin: 8px 0 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
   line-height: 1.1;
   text-transform: uppercase;
@@ -497,6 +497,12 @@ select {
   font-size: 56px;
   line-height: 0.95;
   text-transform: uppercase;
+}
+
+@media (max-width: 1079px) {
+  .hero-content h1 {
+    font-size: 86px;
+  }
 }
 
 .card-grid {
@@ -757,10 +763,6 @@ select {
     text-align: center;
   }
 
-  .hero-content h1 {
-    font-size: 54px;
-  }
-
   .hero-headline {
     margin-right: auto;
     margin-left: auto;
@@ -773,14 +775,14 @@ select {
   }
 
   .stat-item dt {
-    font-size: 38px;
+    font-size: 44px;
   }
 
   .stat-item dd {
     max-width: none;
     margin-right: auto;
     margin-left: auto;
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .focus-grid,
@@ -814,6 +816,10 @@ select {
 }
 
 @media (max-width: 620px) {
+  .hero-content h1 {
+    font-size: 52px;
+  }
+
   .contact-form__row {
     grid-template-columns: 1fr;
   }
@@ -829,10 +835,6 @@ select {
 }
 
 @media (max-width: 420px) {
-  .hero-content h1 {
-    font-size: 46px;
-  }
-
   .profile-card h2 {
     font-size: 30px;
   }
