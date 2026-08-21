@@ -4,10 +4,10 @@
 
 I explore patterns, challenge assumptions, and use data to build things that matter.
 
-![Data Science](https://img.shields.io/badge/Data%20Science-171514?style=flat-square&logo=python&logoColor=F46C38)
-![Artificial Intelligence](https://img.shields.io/badge/Artificial%20Intelligence-171514?style=flat-square&logo=openai&logoColor=B7FF2A)
-![Analytics](https://img.shields.io/badge/Analytics-171514?style=flat-square&logo=googleanalytics&logoColor=60D2C6)
-![Built with Astro](https://img.shields.io/badge/Built%20with%20Astro-171514?style=flat-square&logo=astro&logoColor=F46C38)
+![Data Science](https://img.shields.io/badge/Data%20Science-C94F21?style=for-the-badge)
+![AI Solutions](https://img.shields.io/badge/AI%20Solutions-5F8F16?style=for-the-badge)
+![Business Insight](https://img.shields.io/badge/Business%20Insight-287F77?style=for-the-badge)
+![Applied Analytics](https://img.shields.io/badge/Applied%20Analytics-4D4744?style=for-the-badge)
 
 This portfolio brings together my work across data science, artificial intelligence, analytics, and business problem-solving. It reflects how I approach complex questions: with curiosity, clear reasoning, and a focus on practical outcomes.
 
