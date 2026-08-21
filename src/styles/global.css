@@ -515,6 +515,59 @@ select {
   gap: 14px;
 }
 
+.experience-tabs {
+  width: fit-content;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, auto));
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.experience-tab {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+  white-space: nowrap;
+}
+
+.experience-tab:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--heading);
+}
+
+.experience-tab.is-active {
+  background: var(--orange);
+  color: var(--ink);
+}
+
+.experience-tab:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.experience-panel[hidden] {
+  display: none;
+}
+
 .timeline-item {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
@@ -525,6 +578,11 @@ select {
 .timeline-item h3,
 .timeline-item p {
   margin-top: 0;
+}
+
+.timeline-item--empty {
+  min-height: 118px;
+  align-items: center;
 }
 
 .tools-grid {
