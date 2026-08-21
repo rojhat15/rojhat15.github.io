@@ -1,43 +1,96 @@
-# Astro Starter Kit: Minimal
+# Rojhat Yildirim - Portfolio
+
+Personal portfolio of Rojhat Yildirim, Data Scientist. The website is built with Astro and includes sections for projects, experience, tools, and contact.
+
+## Technology
+
+- Astro 7
+- TypeScript
+- Poppins via Fontsource
+- Lucide and Font Awesome icons
+- Formspree for the contact form
+- Responsive CSS without a client-side UI framework
+
+## Requirements
+
+- Node.js 22.12 or newer
+- npm
+
+## Local Development
+
+Install the dependencies:
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Create a local `.env` file based on `.env.example`:
 
-## 🚀 Project Structure
+```env
+PUBLIC_FORMSPREE_FORM_ID=your-form-id
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+Use only the ID from the Formspree endpoint. For `https://formspree.io/f/abcdefgh`, the ID is `abcdefgh`.
+
+Start the development server:
+
+```sh
+npm run dev
+```
+
+The website is available at `http://localhost:4321` by default.
+
+## Scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Starts the local development server |
+| `npm run build` | Builds the static production site in `dist/` |
+| `npm run preview` | Previews the production build locally |
+| `npm run astro -- --help` | Lists the available Astro CLI commands |
+
+## Project Structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+|- components/    Astro components used on the page
+|- data/          Portfolio content
+|- layouts/       Shared HTML layout
+|- pages/         Page routes
+`- styles/        Global styles and responsive rules
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The main portfolio content is stored in `src/data/profile.ts`. The contact form logic and Formspree integration are located in `src/components/Contact.astro`.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Contact Form
 
-Any static assets, like images, can be placed in the `public/` directory.
+The form submits through Formspree and includes:
 
-## 🧞 Commands
+- Native input validation
+- AJAX submission without a page refresh
+- Success and error feedback
+- A `_gotcha` honeypot for basic spam bots
+- A disabled submit button while a request is in progress
 
-All commands are run from the root of the project, from a terminal:
+`PUBLIC_FORMSPREE_FORM_ID` is a public configuration value, not a secret. The local `.env` file is not committed to Git. When the hosting provider builds the website from Git, the same environment variable must be configured there.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Deployment Checklist
 
-## 👀 Want to learn more?
+- [ ] Configure `PUBLIC_FORMSPREE_FORM_ID` at the hosting provider.
+- [ ] Connect the final domain to the website.
+- [ ] Open the form settings in Formspree.
+- [ ] Set **Restrict to Domain** to the final domain without `https://`.
+- [ ] Use the root domain without `www` when both the `www` and non-`www` versions are available.
+- [ ] Confirm that CAPTCHA and spam protection remain enabled in Formspree.
+- [ ] Send a test message from the live domain after deployment.
+- [ ] Confirm that the message reaches the correct email address and that replies work correctly.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Production Check
+
+Run at least the following command before every deployment:
+
+```sh
+npm run build
+```
+
+Then check the website on desktop and mobile, paying particular attention to navigation, scroll animations, and the contact form.
