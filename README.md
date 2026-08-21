@@ -1,96 +1,43 @@
-# Rojhat Yildirim - Portfolio
+# Rojhat Yildirim
 
-Personal portfolio of Rojhat Yildirim, Data Scientist. The website is built with Astro and includes sections for projects, experience, tools, and contact.
+## Data Scientist
 
-## Technology
+I explore patterns, challenge assumptions, and use data to build things that matter.
 
-- Astro 7
-- TypeScript
-- Poppins via Fontsource
-- Lucide and Font Awesome icons
-- Formspree for the contact form
-- Responsive CSS without a client-side UI framework
+This portfolio brings together my work across data science, artificial intelligence, analytics, and business problem-solving. It reflects how I approach complex questions: with curiosity, clear reasoning, and a focus on practical outcomes.
 
-## Requirements
+## About Me
 
-- Node.js 22.12 or newer
-- npm
+I combine data, AI, and business insight to uncover patterns and turn them into useful solutions. My work is driven by the belief that strong analysis should not stop at an interesting finding; it should help people make better decisions and create meaningful impact.
 
-## Local Development
+## At a Glance
 
-Install the dependencies:
+- 6+ years of experience
+- 32+ completed projects
+- 10+ coding languages and technologies
 
-```sh
-npm install
-```
+## What You Will Find
 
-Create a local `.env` file based on `.env.example`:
+### Selected Work
 
-```env
-PUBLIC_FORMSPREE_FORM_ID=your-form-id
-```
+Projects that show how I use predictive analytics, AI workflows, and business intelligence to solve real problems.
 
-Use only the ID from the Formspree endpoint. For `https://formspree.io/f/abcdefgh`, the ID is `abcdefgh`.
+### Experience
 
-Start the development server:
+An overview of my work in data science, AI and automation, and business-focused problem-solving.
 
-```sh
-npm run dev
-```
+### Tools and Skills
 
-The website is available at `http://localhost:4321` by default.
+The technologies and disciplines I work with, including Python, SQL, machine learning, data visualization, analytics, and AI.
 
-## Scripts
+## Contact
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Starts the local development server |
-| `npm run build` | Builds the static production site in `dist/` |
-| `npm run preview` | Previews the production build locally |
-| `npm run astro -- --help` | Lists the available Astro CLI commands |
+Have a data, AI, or analytics challenge? Use the contact form on the website to get in touch.
 
-## Project Structure
+## Owner Reminder
 
-```text
-src/
-|- components/    Astro components used on the page
-|- data/          Portfolio content
-|- layouts/       Shared HTML layout
-|- pages/         Page routes
-`- styles/        Global styles and responsive rules
-```
+When the website is live:
 
-The main portfolio content is stored in `src/data/profile.ts`. The contact form logic and Formspree integration are located in `src/components/Contact.astro`.
-
-## Contact Form
-
-The form submits through Formspree and includes:
-
-- Native input validation
-- AJAX submission without a page refresh
-- Success and error feedback
-- A `_gotcha` honeypot for basic spam bots
-- A disabled submit button while a request is in progress
-
-`PUBLIC_FORMSPREE_FORM_ID` is a public configuration value, not a secret. The local `.env` file is not committed to Git. When the hosting provider builds the website from Git, the same environment variable must be configured there.
-
-## Deployment Checklist
-
-- [ ] Configure `PUBLIC_FORMSPREE_FORM_ID` at the hosting provider.
-- [ ] Connect the final domain to the website.
-- [ ] Open the form settings in Formspree.
-- [ ] Set **Restrict to Domain** to the final domain without `https://`.
-- [ ] Use the root domain without `www` when both the `www` and non-`www` versions are available.
-- [ ] Confirm that CAPTCHA and spam protection remain enabled in Formspree.
-- [ ] Send a test message from the live domain after deployment.
-- [ ] Confirm that the message reaches the correct email address and that replies work correctly.
-
-## Production Check
-
-Run at least the following command before every deployment:
-
-```sh
-npm run build
-```
-
-Then check the website on desktop and mobile, paying particular attention to navigation, scroll animations, and the contact form.
+- Set **Restrict to Domain** in the Formspree form settings to the final production domain, without `https://`.
+- Keep CAPTCHA and spam protection enabled.
+- Send a test message from the live website and confirm that it reaches the correct email address.
