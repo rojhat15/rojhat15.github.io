@@ -10,12 +10,6 @@ export const profile = {
     { value: "32+", label: "Projects completed" },
     { value: "10+", label: "Coding languages" },
   ],
-  focusAreas: [
-    "Data science",
-    "AI solutions",
-    "Business insight",
-    "Applied analytics",
-  ],
   projects: [
     {
       id: "predictive-analytics",

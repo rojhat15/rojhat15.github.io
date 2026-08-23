@@ -1,4 +1,5 @@
 ---
+import { ArrowRight, BriefcaseBusiness, FolderOpen } from "@lucide/astro";
 import { profile } from "../data/profile";
 import Stats from "./Stats.astro";
 ---
@@ -12,15 +13,41 @@ import Stats from "./Stats.astro";
     <p class="hero-headline">{profile.headline}</p>
     <Stats />
 
-    <div class="focus-grid" aria-label="Focus areas">
-      <article class="focus-card focus-card--orange">
-        <span class="focus-card__label">Core focus</span>
-        <h2>Curiosity, analysis and practical impact</h2>
-      </article>
-      <article class="focus-card focus-card--green">
-        <span class="focus-card__label">Working with</span>
-        <h2>{profile.focusAreas.join(", ")}</h2>
-      </article>
+    <div class="focus-grid" aria-label="Featured navigation">
+      <a class="focus-card focus-card--orange" href="#projects">
+        <FolderOpen
+          class="focus-card__icon"
+          size={34}
+          strokeWidth={1.8}
+          aria-hidden="true"
+        />
+        <div class="focus-card__footer">
+          <div class="focus-card__copy">
+            <span class="focus-card__label">Selected work</span>
+            <h2>Explore my projects</h2>
+          </div>
+          <span class="focus-card__arrow" aria-hidden="true">
+            <ArrowRight size={20} strokeWidth={2} />
+          </span>
+        </div>
+      </a>
+      <a class="focus-card focus-card--green" href="#experience">
+        <BriefcaseBusiness
+          class="focus-card__icon"
+          size={34}
+          strokeWidth={1.8}
+          aria-hidden="true"
+        />
+        <div class="focus-card__footer">
+          <div class="focus-card__copy">
+            <span class="focus-card__label">My background</span>
+            <h2>View my experience</h2>
+          </div>
+          <span class="focus-card__arrow" aria-hidden="true">
+            <ArrowRight size={20} strokeWidth={2} />
+          </span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
