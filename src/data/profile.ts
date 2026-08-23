@@ -69,7 +69,7 @@ export const profile = {
         "A custom Astro portfolio focused on accessible interactions, responsive layouts and a maintainable, data-driven content structure.",
       highlights: [
         "Responsive interface",
-        "Accessible interactions",
+        "Fast, optimized performance",
         "Data-driven content",
       ],
       tools: ["Astro", "TypeScript", "CSS"],
