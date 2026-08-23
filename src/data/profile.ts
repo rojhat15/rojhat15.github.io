@@ -54,22 +54,22 @@ export const profile = {
       status: "Case study soon",
     },
     {
-      id: "business-intelligence",
-      title: "Business Intelligence",
-      category: "Analytics",
+      id: "personal-portfolio",
+      title: "Personal Portfolio",
+      category: "Web Development",
       description:
-        "Building clear dashboards and reporting flows around the metrics that matter.",
+        "Designing and building a responsive portfolio that presents my work, experience and skills with clarity.",
       overview:
-        "Structuring data, metrics and reporting flows into dashboards that make performance easier to understand and act on.",
+        "A custom Astro portfolio focused on accessible interactions, responsive layouts and a maintainable, data-driven content structure.",
       highlights: [
-        "KPI design",
-        "Dashboard development",
-        "Reporting workflows",
+        "Responsive interface",
+        "Accessible interactions",
+        "Data-driven content",
       ],
-      tools: ["SQL", "Data Visualization", "Analytics"],
+      tools: ["Astro", "TypeScript", "CSS"],
       screenshots: [] as { src: string; alt: string }[],
       url: null as string | null,
-      status: "Case study soon",
+      status: "In development",
     },
   ],
   experience: [
