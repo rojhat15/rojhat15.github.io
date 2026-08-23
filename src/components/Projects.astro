@@ -80,16 +80,21 @@ const projectVisuals = {
     profile.projects.map((project) => (
       <template id={`project-template-${project.id}`}>
         <article class="project-detail">
-          <header class="project-detail__header">
+          <header class="project-detail__header project-detail__header--compact">
             <div>
               <p class="card-kicker">{project.category}</p>
               <h2>{project.title}</h2>
             </div>
-            <p class="project-detail__intro">{project.description}</p>
           </header>
 
           {project.screenshots.length > 0 && (
-            <section class="project-gallery" aria-label={`${project.title} screenshots`}>
+            <section
+              class:list={[
+                "project-gallery",
+                project.compactGallery && "project-gallery--compact",
+              ]}
+              aria-label={`${project.title} screenshots`}
+            >
               {project.screenshots.map((screenshot) => (
                 <figure>
                   <img
@@ -119,19 +124,21 @@ const projectVisuals = {
             </section>
           </div>
 
-          <div class="project-detail__tools" aria-label="Tools and methods">
-            {project.tools.map((tool) => <span>{tool}</span>)}
-          </div>
+          <section class="project-detail__stack" aria-label="Technology stack">
+            <p class="project-detail__label">Stack</p>
+            <div class="project-detail__tools">
+              {project.tools.map((tool) => <span>{tool}</span>)}
+            </div>
+          </section>
 
-          <footer class="project-detail__footer">
-            <span>{project.status}</span>
-            {project.url && (
+          {project.url && (
+            <div class="project-detail__actions">
               <a href={project.url} target="_blank" rel="noreferrer">
                 View project
                 <ExternalLink size={17} strokeWidth={2} aria-hidden="true" />
               </a>
-            )}
-          </footer>
+            </div>
+          )}
         </article>
       </template>
     ))

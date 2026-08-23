@@ -777,6 +777,11 @@ body.project-dialog-open {
   border-bottom: 1px solid var(--line);
 }
 
+.project-detail__header--compact {
+  grid-template-columns: 1fr;
+  padding-top: 4px;
+}
+
 .project-detail__header .card-kicker {
   margin: 0 0 10px;
   color: var(--orange);
@@ -790,18 +795,17 @@ body.project-dialog-open {
   text-transform: uppercase;
 }
 
-.project-detail__intro {
-  margin: 0;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.45;
-}
-
 .project-gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-top: 28px;
+}
+
+.project-gallery--compact {
+  width: min(100%, 560px);
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .project-gallery figure {
@@ -872,11 +876,14 @@ body.project-dialog-open {
   transform: translateY(-50%);
 }
 
+.project-detail__stack {
+  padding-bottom: 28px;
+}
+
 .project-detail__tools {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding-bottom: 28px;
 }
 
 .project-detail__tools span {
@@ -889,21 +896,13 @@ body.project-dialog-open {
   line-height: 1;
 }
 
-.project-detail__footer {
-  min-height: 66px;
+.project-detail__actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding-top: 22px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
+  justify-content: flex-end;
 }
 
-.project-detail__footer a {
+.project-detail__actions a {
   min-height: 42px;
   display: inline-flex;
   align-items: center;
@@ -916,8 +915,8 @@ body.project-dialog-open {
   transition: background-color 160ms ease;
 }
 
-.project-detail__footer a:hover,
-.project-detail__footer a:focus-visible {
+.project-detail__actions a:hover,
+.project-detail__actions a:focus-visible {
   background: var(--green);
   outline: none;
 }
@@ -1511,12 +1510,12 @@ body.project-dialog-open {
     font-size: 16px;
   }
 
-  .project-detail__footer {
+  .project-detail__actions {
     align-items: flex-start;
     flex-direction: column;
   }
 
-  .project-detail__footer a {
+  .project-detail__actions a {
     width: 100%;
   }
 }
