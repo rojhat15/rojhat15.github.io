@@ -38,19 +38,52 @@ export const profile = {
   ],
   experience: [
     {
-      title: "Data Science",
-      description:
-        "Exploring data, validating assumptions and translating analysis into practical direction.",
+      role: "Data Scientist",
+      company: "Ministerie van Defensie",
+      period: "Feb 2026 - Present",
+      logo: "/images/experience/defensie.svg",
+      logoAlt: "Ministerie van Defensie logo",
+      description: "",
     },
     {
-      title: "AI & Automation",
-      description:
-        "Using modern AI tooling to create useful workflows, prototypes and decision support.",
+      role: "Data Scientist",
+      company: "Aalberts",
+      period: "Dec 2023 - Sep 2024",
+      logo: "/images/experience/aalberts.png",
+      logoAlt: "Aalberts hydronic flow control logo",
+      description: "",
     },
     {
-      title: "Business Problem Solving",
-      description:
-        "Connecting technical analysis with commercial context, stakeholder needs and measurable impact.",
+      role: "Data Scientist",
+      company: "VanDerEng",
+      period: "Feb 2023 - Sep 2023",
+      logo: "/images/experience/vandereng.svg",
+      logoAlt: "VanDerEng logo",
+      description: "",
+    },
+    {
+      role: "Co-maker",
+      company: "Windesheim",
+      period: "Aug 2022 - Feb 2023",
+      logo: "/images/experience/windesheim-mark.svg",
+      logoAlt: "Windesheim logo",
+      description: "",
+    },
+    {
+      role: "ICT Project Manager",
+      company: "Brixxs",
+      period: "Aug 2021 - Feb 2022",
+      logo: "/images/experience/brixxs.png",
+      logoAlt: "Brixxs logo",
+      description: "",
+    },
+    {
+      role: "Search Engine Optimization Specialist",
+      company: "Advertise Solution",
+      period: "Aug 2019 - Feb 2020",
+      logo: "/images/experience/advertise-solution.png",
+      logoAlt: "Advertise Solution logo",
+      description: "",
     },
   ],
   tools: [

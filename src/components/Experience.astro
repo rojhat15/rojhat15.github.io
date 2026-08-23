@@ -43,9 +43,30 @@ import SectionHeading from "./SectionHeading.astro";
     <div class="timeline-list">
       {
         profile.experience.map((item) => (
-          <article class="timeline-item">
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
+          <article class="timeline-item experience-item">
+            <div class="experience-identity">
+              <div class="experience-logo">
+                <img
+                  src={item.logo}
+                  alt={item.logoAlt}
+                  width="56"
+                  height="56"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div>
+                <h3>{item.company}</h3>
+                <p class="experience-period">{item.period}</p>
+              </div>
+            </div>
+            <div class="experience-details">
+              {
+                item.description && (
+                  <p class="experience-description">{item.description}</p>
+                )
+              }
+            </div>
           </article>
         ))
       }

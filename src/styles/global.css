@@ -575,6 +575,69 @@ select {
   padding: 22px;
 }
 
+.experience-item {
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 0.72fr);
+  align-items: center;
+  gap: 28px;
+}
+
+.experience-identity {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.experience-logo {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  display: grid;
+  place-items: center;
+}
+
+.experience-logo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.experience-logo img[src$="defensie.svg"] {
+  width: auto;
+  height: 58px;
+}
+
+.experience-item h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.experience-period,
+.experience-description {
+  margin: 0;
+}
+
+.experience-item .experience-period {
+  margin-top: 5px;
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.experience-details {
+  min-width: 0;
+}
+
+.experience-item .experience-description {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
 .timeline-item h3,
 .timeline-item p {
   margin-top: 0;
