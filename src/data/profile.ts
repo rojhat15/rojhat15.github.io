@@ -22,19 +22,25 @@ export const profile = {
   ],
   projects: [
     {
-      id: "predictive-analytics",
-      title: "Predictive Analytics",
-      category: "Forecasting",
+      id: "punch-ai",
+      title: "Punch AI",
+      category: "Mobile App",
       description:
-        "Turning historical patterns into practical forecasts for better decisions.",
+        "An AI-powered boxing coach that turns training videos into practical, personalized feedback.",
       overview:
-        "Exploring how historical data can be prepared, modelled and translated into forecasts that support practical business decisions.",
+        "A Flutter mobile app that lets boxers record or import training sessions, receive AI-generated scores and coaching, and track progress across technique, speed, defense and footwork.",
       highlights: [
-        "Time-series exploration",
-        "Model evaluation",
-        "Decision-ready outputs",
+        "Video-based boxing analysis",
+        "AI-generated coaching insights",
+        "Session scores and progress tracking",
       ],
-      tools: ["Python", "Machine Learning", "Data Visualization"],
+      tools: [
+        "Flutter",
+        "Firebase",
+        "Apple Vision Framework",
+        "OpenAI API",
+        "RevenueCat",
+      ],
       thumbnail: null as ProjectImage | null,
       screenshots: [] as ProjectImage[],
       compactGallery: false,
