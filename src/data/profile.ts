@@ -1,3 +1,13 @@
+type ProjectImage = {
+  src: string;
+  alt: string;
+};
+
+const personalPortfolioScreenshot: ProjectImage = {
+  src: "/images/projects/personal-portfolio-home.png",
+  alt: "Personal portfolio homepage with profile card and Data Scientist introduction",
+};
+
 export const profile = {
   name: "Rojhat Yildirim",
   role: "Data Scientist",
@@ -25,7 +35,8 @@ export const profile = {
         "Decision-ready outputs",
       ],
       tools: ["Python", "Machine Learning", "Data Visualization"],
-      screenshots: [] as { src: string; alt: string }[],
+      thumbnail: null as ProjectImage | null,
+      screenshots: [] as ProjectImage[],
       url: null as string | null,
       status: "Case study soon",
     },
@@ -43,7 +54,8 @@ export const profile = {
         "Quality validation",
       ],
       tools: ["Python", "AI", "Automation"],
-      screenshots: [] as { src: string; alt: string }[],
+      thumbnail: null as ProjectImage | null,
+      screenshots: [] as ProjectImage[],
       url: null as string | null,
       status: "Case study soon",
     },
@@ -61,7 +73,8 @@ export const profile = {
         "Data-driven content",
       ],
       tools: ["Astro", "TypeScript", "CSS"],
-      screenshots: [] as { src: string; alt: string }[],
+      thumbnail: personalPortfolioScreenshot,
+      screenshots: [personalPortfolioScreenshot],
       url: null as string | null,
       status: "In development",
     },

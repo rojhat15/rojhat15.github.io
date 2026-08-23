@@ -28,8 +28,25 @@ const projectVisuals = {
 
         return (
           <article class="project-card">
-            <div class="project-card__visual" aria-hidden="true">
-              <Icon size={38} strokeWidth={1.7} />
+            <div
+              class:list={[
+                "project-card__visual",
+                project.thumbnail && "project-card__visual--image",
+              ]}
+              aria-hidden="true"
+            >
+              {project.thumbnail ? (
+                <img
+                  src={project.thumbnail.src}
+                  alt=""
+                  width="1440"
+                  height="1000"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <Icon size={38} strokeWidth={1.7} />
+              )}
             </div>
 
             <div class="project-card__content">
