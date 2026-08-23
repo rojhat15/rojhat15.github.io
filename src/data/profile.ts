@@ -63,7 +63,7 @@ export const profile = {
     },
     {
       role: "Co-maker",
-      company: "Windesheim",
+      company: "University of Applied Sciences Windesheim",
       period: "Aug 2022 - Feb 2023",
       logo: "/images/experience/windesheim-mark.svg",
       logoAlt: "Windesheim logo",
@@ -84,6 +84,36 @@ export const profile = {
       logo: "/images/experience/advertise-solution.png",
       logoAlt: "Advertise Solution logo",
       description: "",
+    },
+  ],
+  education: [
+    {
+      institution: "Amsterdam University of Applied Sciences",
+      qualification: "Master, Artificial Intelligence",
+      period: "2024 - 2025",
+      logo: "/images/education/hva-mark.svg",
+      logoAlt: "Hogeschool van Amsterdam logo",
+    },
+    {
+      institution: "University of Applied Sciences Windesheim",
+      qualification: "Bachelor's degree, Business/Commerce, General",
+      period: "2020 - 2024",
+      logo: "/images/experience/windesheim-mark.svg",
+      logoAlt: "Windesheim logo",
+    },
+    {
+      institution: "Amsterdam University of Applied Sciences",
+      qualification: "Minor, Data Science",
+      period: "2022 - 2023",
+      logo: "/images/education/hva-mark.svg",
+      logoAlt: "Hogeschool van Amsterdam logo",
+    },
+    {
+      institution: "ROC van Amsterdam | Flevoland",
+      qualification: "Bachelor's degree, Software Developer",
+      period: "2018 - 2020",
+      logo: "/images/education/rocva.svg",
+      logoAlt: "ROC van Amsterdam en ROC van Flevoland logo",
     },
   ],
   tools: [
