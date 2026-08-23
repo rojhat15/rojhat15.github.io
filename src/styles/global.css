@@ -646,6 +646,50 @@ select {
   line-height: 1.4;
 }
 
+.education-item--parent,
+.education-item--child {
+  position: relative;
+}
+
+.education-item--child {
+  width: calc(100% - 28px);
+  margin-left: 28px;
+  border-left-color: rgba(244, 108, 56, 0.72);
+}
+
+.education-item--child::before {
+  position: absolute;
+  top: -16px;
+  left: -22px;
+  width: 22px;
+  height: 40px;
+  border-bottom: 2px solid var(--orange);
+  border-left: 2px solid var(--orange);
+  border-bottom-left-radius: 8px;
+  content: "";
+  pointer-events: none;
+}
+
+.education-item .education-relationship {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 8px 0 0;
+  color: var(--orange);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.education-item--parent .education-relationship {
+  color: var(--muted);
+}
+
+.education-relationship svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
 .timeline-item h3,
 .timeline-item p {
   margin-top: 0;
@@ -904,6 +948,16 @@ select {
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
+
+  .education-item--child {
+    width: calc(100% - 18px);
+    margin-left: 18px;
+  }
+
+  .education-item--child::before {
+    left: -14px;
+    width: 14px;
   }
 
   .section-heading h2 {

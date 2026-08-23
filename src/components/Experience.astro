@@ -1,5 +1,5 @@
 ---
-import { Briefcase, GraduationCap } from "@lucide/astro";
+import { Briefcase, GraduationCap, Link2 } from "@lucide/astro";
 import { profile } from "../data/profile";
 import SectionHeading from "./SectionHeading.astro";
 ---
@@ -83,7 +83,15 @@ import SectionHeading from "./SectionHeading.astro";
     <div class="timeline-list">
       {
         profile.education.map((item) => (
-          <article class="timeline-item experience-item education-item">
+          <article
+            class:list={[
+              "timeline-item",
+              "experience-item",
+              "education-item",
+              item.relationshipRole &&
+                `education-item--${item.relationshipRole}`,
+            ]}
+          >
             <div class="experience-identity">
               <div class="experience-logo">
                 <img
@@ -102,6 +110,14 @@ import SectionHeading from "./SectionHeading.astro";
             </div>
             <div class="experience-details">
               <p class="education-qualification">{item.qualification}</p>
+              {
+                item.relationship && (
+                  <p class="education-relationship">
+                    <Link2 size={14} strokeWidth={2} aria-hidden="true" />
+                    <span>{item.relationship}</span>
+                  </p>
+                )
+              }
             </div>
           </article>
         ))
