@@ -613,7 +613,7 @@ select {
   transform: translateY(-2px);
 }
 
-.project-card:focus-within {
+.project-card:has(.project-card__open:focus-visible) {
   border-color: var(--project-accent);
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--project-accent) 30%, transparent);
 }
@@ -692,7 +692,7 @@ select {
 }
 
 .project-card:hover .project-card__arrow,
-.project-card:focus-within .project-card__arrow {
+.project-card:has(.project-card__open:focus-visible) .project-card__arrow {
   color: var(--project-accent);
   transform: translate(2px, -2px);
 }

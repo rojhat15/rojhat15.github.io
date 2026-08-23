@@ -39,7 +39,6 @@ export const profile = {
       screenshots: [] as ProjectImage[],
       compactGallery: false,
       url: null as string | null,
-      status: "Case study soon",
     },
     {
       id: "ai-workflows",
@@ -59,7 +58,6 @@ export const profile = {
       screenshots: [] as ProjectImage[],
       compactGallery: false,
       url: null as string | null,
-      status: "Case study soon",
     },
     {
       id: "personal-portfolio",
@@ -79,7 +77,6 @@ export const profile = {
       screenshots: [personalPortfolioScreenshot],
       compactGallery: true,
       url: null as string | null,
-      status: "In development",
     },
   ],
   experience: [
