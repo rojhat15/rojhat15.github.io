@@ -43,7 +43,8 @@ export const profile = {
       period: "Feb 2026 – Present",
       logo: "/images/experience/defensie.svg",
       logoAlt: "Ministerie van Defensie logo",
-      description: "",
+      description:
+        "Developing an AI-powered course-authoring tool for training designers across the organization, projected to shorten the development of each course by 6+ months.",
     },
     {
       role: "Data Scientist",
@@ -62,14 +63,6 @@ export const profile = {
       logoAlt: "VanDerEng logo",
       description:
         "Developed TinyML models with 98%+ accuracy and connected 4 sensors to make production data from multiple machines accessible for analysis and dashboards.",
-    },
-    {
-      role: "Co-maker",
-      company: "Windesheim University of Applied Sciences",
-      period: "Aug 2022 – Feb 2023",
-      logo: "/images/experience/windesheim-mark.svg",
-      logoAlt: "Windesheim logo",
-      description: "",
     },
     {
       role: "ICT Project Manager",
