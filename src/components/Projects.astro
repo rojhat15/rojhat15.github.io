@@ -32,6 +32,7 @@ const projectVisuals = {
               class:list={[
                 "project-card__visual",
                 project.thumbnail && "project-card__visual--image",
+                project.thumbnail && `project-card__visual--${project.id}`,
               ]}
               aria-hidden="true"
             >

@@ -8,6 +8,11 @@ const personalPortfolioScreenshot: ProjectImage = {
   alt: "Personal portfolio homepage with profile card and Data Scientist introduction",
 };
 
+const punchAiPreview: ProjectImage = {
+  src: "/images/projects/punch-ai-preview.png",
+  alt: "Punch AI mobile app showing boxing analytics, a weekly overview and training statistics",
+};
+
 export const profile = {
   name: "Rojhat Yildirim",
   role: "Data Scientist",
@@ -41,7 +46,7 @@ export const profile = {
         "OpenAI API",
         "RevenueCat",
       ],
-      thumbnail: null as ProjectImage | null,
+      thumbnail: punchAiPreview,
       screenshots: [] as ProjectImage[],
       compactGallery: false,
       url: null as string | null,
