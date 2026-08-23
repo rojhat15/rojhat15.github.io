@@ -89,7 +89,8 @@ export const profile = {
   education: [
     {
       institution: "Amsterdam University of Applied Sciences",
-      qualification: "Master, Artificial Intelligence",
+      level: "Master's degree",
+      program: "Artificial Intelligence",
       period: "2024 - 2025",
       logo: "/images/education/hva-mark.svg",
       logoAlt: "Hogeschool van Amsterdam logo",
@@ -98,7 +99,8 @@ export const profile = {
     },
     {
       institution: "University of Applied Sciences Windesheim",
-      qualification: "Bachelor's degree, Business Administration",
+      level: "Bachelor's degree",
+      program: "Business Administration",
       period: "2020 - 2024",
       logo: "/images/experience/windesheim-mark.svg",
       logoAlt: "Windesheim logo",
@@ -107,7 +109,8 @@ export const profile = {
     },
     {
       institution: "Amsterdam University of Applied Sciences",
-      qualification: "Minor, Data Science",
+      level: "Minor",
+      program: "Data Science",
       period: "2022 - 2023",
       logo: "/images/education/hva-mark.svg",
       logoAlt: "Amsterdam University of Applied Sciences logo",
@@ -116,7 +119,8 @@ export const profile = {
     },
     {
       institution: "ROC van Amsterdam | Flevoland",
-      qualification: "Bachelor's degree, Software Developer",
+      level: "Bachelor's degree",
+      program: "Software Developer",
       period: "2018 - 2020",
       logo: "/images/education/rocva.svg",
       logoAlt: "ROC van Amsterdam en ROC van Flevoland logo",
