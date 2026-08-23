@@ -608,6 +608,16 @@ select {
   height: 58px;
 }
 
+.experience-logo--wide {
+  width: 72px;
+  flex-basis: 72px;
+}
+
+.experience-logo--wide img {
+  width: 72px;
+  height: 58px;
+}
+
 .experience-item h3 {
   margin: 0;
   font-size: 20px;

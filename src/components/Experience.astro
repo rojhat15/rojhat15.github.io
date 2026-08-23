@@ -93,7 +93,13 @@ import SectionHeading from "./SectionHeading.astro";
             ]}
           >
             <div class="experience-identity">
-              <div class="experience-logo">
+              <div
+                class:list={[
+                  "experience-logo",
+                  item.logoVariant &&
+                    `experience-logo--${item.logoVariant}`,
+                ]}
+              >
                 <img
                   src={item.logo}
                   alt={item.logoAlt}
