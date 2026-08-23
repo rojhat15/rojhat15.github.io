@@ -51,7 +51,8 @@ export const profile = {
       period: "Dec 2023 – Sep 2024",
       logo: "/images/experience/aalberts.png",
       logoAlt: "Aalberts hydronic flow control logo",
-      description: "",
+      description:
+        "Developed a scalable cloud pipeline across 200+ data sources, saving approximately 8 hours of manual research per reporting cycle and delivering real-time market and product insights across departments.",
     },
     {
       role: "Data Scientist",
@@ -59,7 +60,8 @@ export const profile = {
       period: "Feb 2023 – Sep 2023",
       logo: "/images/experience/vandereng.svg",
       logoAlt: "VanDerEng logo",
-      description: "",
+      description:
+        "Developed TinyML models with 98%+ accuracy and connected 4 sensors to make production data from multiple machines accessible for analysis and dashboards.",
     },
     {
       role: "Co-maker",
@@ -75,7 +77,8 @@ export const profile = {
       period: "Aug 2021 – Feb 2022",
       logo: "/images/experience/brixxs.png",
       logoAlt: "Brixxs logo",
-      description: "",
+      description:
+        "Led 3 IT projects with a 4-person team, managing planning, budgets and stakeholders from concept through successful delivery.",
     },
     {
       role: "Search Engine Optimization Specialist",
@@ -83,7 +86,8 @@ export const profile = {
       period: "Aug 2019 – Feb 2020",
       logo: "/images/experience/advertise-solution.png",
       logoAlt: "Advertise Solution logo",
-      description: "",
+      description:
+        "Developed 5 custom web applications across front-end and back-end, complemented by targeted SEO improvements to strengthen clients' online visibility.",
     },
   ],
   education: [
