@@ -1,22 +1,187 @@
 ---
+import {
+  ArrowUpRight,
+  BarChart3,
+  BrainCircuit,
+  ExternalLink,
+  LineChart,
+  X,
+} from "@lucide/astro";
 import { profile } from "../data/profile";
 import SectionHeading from "./SectionHeading.astro";
+
+const projectVisuals = {
+  "predictive-analytics": LineChart,
+  "ai-workflows": BrainCircuit,
+  "business-intelligence": BarChart3,
+};
 ---
 
 <section class="content-section" id="projects" data-reveal>
   <SectionHeading eyebrow="Selected work" title="Projects" />
 
-  <div class="card-grid">
+  <div class="project-list">
     {
-      profile.projects.map((project) => (
-        <article class="project-card">
-          <div>
-            <p class="card-kicker">{project.status}</p>
-            <h3>{project.title}</h3>
-          </div>
-          <p>{project.description}</p>
-        </article>
-      ))
+      profile.projects.map((project) => {
+        const Icon =
+          projectVisuals[project.id as keyof typeof projectVisuals];
+
+        return (
+          <article class="project-card">
+            <div class="project-card__visual" aria-hidden="true">
+              <Icon size={38} strokeWidth={1.7} />
+            </div>
+
+            <div class="project-card__content">
+              <div class="project-card__meta">
+                <span>{project.category}</span>
+                <span>{project.status}</span>
+              </div>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+            </div>
+
+            <span class="project-card__arrow" aria-hidden="true">
+              <ArrowUpRight size={22} strokeWidth={2} />
+            </span>
+
+            <button
+              class="project-card__open"
+              type="button"
+              aria-label={`View details for ${project.title}`}
+              aria-haspopup="dialog"
+              aria-controls="project-dialog"
+              data-project-open={project.id}
+            />
+          </article>
+        );
+      })
     }
   </div>
+
+  {
+    profile.projects.map((project) => (
+      <template id={`project-template-${project.id}`}>
+        <article class="project-detail">
+          <header class="project-detail__header">
+            <div>
+              <p class="card-kicker">{project.category}</p>
+              <h2>{project.title}</h2>
+            </div>
+            <p class="project-detail__intro">{project.description}</p>
+          </header>
+
+          {project.screenshots.length > 0 && (
+            <section class="project-gallery" aria-label={`${project.title} screenshots`}>
+              {project.screenshots.map((screenshot) => (
+                <figure>
+                  <img
+                    src={screenshot.src}
+                    alt={screenshot.alt}
+                    width="1200"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              ))}
+            </section>
+          )}
+
+          <div class="project-detail__body">
+            <section>
+              <p class="project-detail__label">Overview</p>
+              <p class="project-detail__overview">{project.overview}</p>
+            </section>
+
+            <section>
+              <p class="project-detail__label">Focus</p>
+              <ul class="project-detail__highlights">
+                {project.highlights.map((highlight) => <li>{highlight}</li>)}
+              </ul>
+            </section>
+          </div>
+
+          <div class="project-detail__tools" aria-label="Tools and methods">
+            {project.tools.map((tool) => <span>{tool}</span>)}
+          </div>
+
+          <footer class="project-detail__footer">
+            <span>{project.status}</span>
+            {project.url && (
+              <a href={project.url} target="_blank" rel="noreferrer">
+                View project
+                <ExternalLink size={17} strokeWidth={2} aria-hidden="true" />
+              </a>
+            )}
+          </footer>
+        </article>
+      </template>
+    ))
+  }
+
+  <dialog
+    class="project-dialog"
+    id="project-dialog"
+    aria-label="Project details"
+  >
+    <div class="project-dialog__shell">
+      <button
+        class="project-dialog__close"
+        type="button"
+        aria-label="Close project details"
+        data-project-close
+      >
+        <X size={21} strokeWidth={2} aria-hidden="true" />
+      </button>
+      <div data-project-content></div>
+    </div>
+  </dialog>
 </section>
+
+<script>
+  const projectDialog = document.querySelector<HTMLDialogElement>(
+    "#project-dialog",
+  );
+  const projectContent = projectDialog?.querySelector<HTMLElement>(
+    "[data-project-content]",
+  );
+  const projectClose = projectDialog?.querySelector<HTMLButtonElement>(
+    "[data-project-close]",
+  );
+  const projectTriggers = document.querySelectorAll<HTMLButtonElement>(
+    "[data-project-open]",
+  );
+  let lastProjectTrigger: HTMLButtonElement | null = null;
+
+  const closeProjectDialog = () => {
+    projectDialog?.close();
+  };
+
+  projectTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const projectId = trigger.dataset.projectOpen;
+      const template = document.querySelector<HTMLTemplateElement>(
+        `#project-template-${projectId}`,
+      );
+
+      if (!projectDialog || !projectContent || !template) return;
+
+      lastProjectTrigger = trigger;
+      projectContent.replaceChildren(template.content.cloneNode(true));
+      document.body.classList.add("project-dialog-open");
+      projectDialog.showModal();
+    });
+  });
+
+  projectClose?.addEventListener("click", closeProjectDialog);
+
+  projectDialog?.addEventListener("click", (event) => {
+    if (event.target === projectDialog) closeProjectDialog();
+  });
+
+  projectDialog?.addEventListener("close", () => {
+    document.body.classList.remove("project-dialog-open");
+    lastProjectTrigger?.focus();
+  });
+</script>

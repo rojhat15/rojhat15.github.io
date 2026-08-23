@@ -18,21 +18,57 @@ export const profile = {
   ],
   projects: [
     {
+      id: "predictive-analytics",
       title: "Predictive Analytics",
+      category: "Forecasting",
       description:
         "Turning historical patterns into practical forecasts for better decisions.",
+      overview:
+        "Exploring how historical data can be prepared, modelled and translated into forecasts that support practical business decisions.",
+      highlights: [
+        "Time-series exploration",
+        "Model evaluation",
+        "Decision-ready outputs",
+      ],
+      tools: ["Python", "Machine Learning", "Data Visualization"],
+      screenshots: [] as { src: string; alt: string }[],
+      url: null as string | null,
       status: "Case study soon",
     },
     {
+      id: "ai-workflows",
       title: "AI Workflows",
+      category: "Applied AI",
       description:
         "Designing data-driven systems that reduce manual work and improve output quality.",
+      overview:
+        "Designing applied AI workflows that combine automation with clear human review points to make complex work more efficient and dependable.",
+      highlights: [
+        "Workflow analysis",
+        "Human-in-the-loop design",
+        "Quality validation",
+      ],
+      tools: ["Python", "AI", "Automation"],
+      screenshots: [] as { src: string; alt: string }[],
+      url: null as string | null,
       status: "Case study soon",
     },
     {
+      id: "business-intelligence",
       title: "Business Intelligence",
+      category: "Analytics",
       description:
         "Building clear dashboards and reporting flows around the metrics that matter.",
+      overview:
+        "Structuring data, metrics and reporting flows into dashboards that make performance easier to understand and act on.",
+      highlights: [
+        "KPI design",
+        "Dashboard development",
+        "Reporting workflows",
+      ],
+      tools: ["SQL", "Data Visualization", "Analytics"],
+      screenshots: [] as { src: string; alt: string }[],
+      url: null as string | null,
       status: "Case study soon",
     },
   ],
