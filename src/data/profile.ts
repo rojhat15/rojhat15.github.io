@@ -118,7 +118,7 @@ export const profile = {
       relationshipRole: "child",
     },
     {
-      institution: "ROC van Amsterdam | Flevoland",
+      institution: "ROC van Flevoland",
       level: "MBO LEVEL 4",
       program: "Software Developer",
       period: "2018 – 2020",
