@@ -609,12 +609,12 @@ select {
 }
 
 .experience-logo--wide {
-  width: 72px;
-  flex-basis: 72px;
+  width: 70px;
+  flex-basis: 70px;
 }
 
 .experience-logo--wide img {
-  width: 72px;
+  width: 70px;
   height: 58px;
 }
 
