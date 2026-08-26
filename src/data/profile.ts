@@ -18,6 +18,7 @@ type ProjectVideo = {
 type ProjectMedia = ProjectImage | ProjectVideo;
 
 type ProjectLink = {
+  icon: "apple" | "tiktok";
   label: string;
   url: string;
 };
@@ -115,10 +116,12 @@ export const profile = {
       compactGallery: false,
       links: [
         {
+          icon: "tiktok",
           label: "View TikTok",
           url: "https://www.tiktok.com/@punch.ai.app",
         },
         {
+          icon: "apple",
           label: "View App Store",
           url: "https://apps.apple.com/nl/app/punch-ai/id6761296998",
         },

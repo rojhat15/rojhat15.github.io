@@ -4,20 +4,26 @@ import {
   BrainCircuit,
   ChevronLeft,
   ChevronRight,
-  ExternalLink,
   PanelsTopLeft,
   Pause,
   Play,
   ScanLine,
   X,
 } from "@lucide/astro";
+import { faApple, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import { profile } from "../data/profile";
+import BrandIcon from "./BrandIcon.astro";
 import SectionHeading from "./SectionHeading.astro";
 
 const projectVisuals = {
   "punch-ai": ScanLine,
   "ai-workflows": BrainCircuit,
   "personal-portfolio": PanelsTopLeft,
+};
+
+const projectLinkIcons = {
+  apple: { icon: faApple, size: 24 },
+  tiktok: { icon: faTiktok, size: 20 },
 };
 ---
 
@@ -231,8 +237,11 @@ const projectVisuals = {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
+                    <BrandIcon
+                      icon={projectLinkIcons[link.icon].icon}
+                      size={projectLinkIcons[link.icon].size}
+                    />
                     {link.label}
-                    <ExternalLink size={17} strokeWidth={2} aria-hidden="true" />
                   </a>
                 ))}
               </div>
