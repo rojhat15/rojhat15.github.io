@@ -878,6 +878,10 @@ body.project-dialog-open {
   outline: none;
 }
 
+.project-gallery__autoplay [hidden] {
+  display: none;
+}
+
 .project-gallery__dots {
   display: flex;
   align-items: center;
@@ -970,7 +974,11 @@ body.project-dialog-open {
   transform: translateY(-50%);
 }
 
-.project-detail__stack {
+.project-detail__footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
   padding-bottom: 28px;
 }
 
@@ -1608,6 +1616,10 @@ body.project-dialog-open {
   .project-detail__actions {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .project-detail__footer {
+    grid-template-columns: 1fr;
   }
 
   .project-detail__actions a {

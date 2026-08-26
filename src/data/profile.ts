@@ -17,6 +17,11 @@ type ProjectVideo = {
 
 type ProjectMedia = ProjectImage | ProjectVideo;
 
+type ProjectLink = {
+  label: string;
+  url: string;
+};
+
 const personalPortfolioScreenshot: ProjectImage = {
   type: "image",
   src: "/images/projects/personal-portfolio-home.png",
@@ -108,7 +113,10 @@ export const profile = {
       thumbnail: punchAiPreview,
       media: punchAiMedia,
       compactGallery: false,
-      url: null as string | null,
+      link: {
+        label: "View TikTok",
+        url: "https://www.tiktok.com/@punch.ai.app",
+      } satisfies ProjectLink,
     },
     {
       id: "ai-workflows",
@@ -127,7 +135,7 @@ export const profile = {
       thumbnail: null as ProjectImage | null,
       media: [] as ProjectMedia[],
       compactGallery: false,
-      url: null as string | null,
+      link: null as ProjectLink | null,
     },
     {
       id: "personal-portfolio",
@@ -146,7 +154,7 @@ export const profile = {
       thumbnail: personalPortfolioScreenshot,
       media: [personalPortfolioScreenshot],
       compactGallery: true,
-      url: null as string | null,
+      link: null as ProjectLink | null,
     },
   ],
   experience: [

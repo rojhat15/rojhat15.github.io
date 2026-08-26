@@ -6,6 +6,8 @@ import {
   ChevronRight,
   ExternalLink,
   PanelsTopLeft,
+  Pause,
+  Play,
   ScanLine,
   X,
 } from "@lucide/astro";
@@ -141,36 +143,58 @@ const projectVisuals = {
                   <button
                     class="project-gallery__nav"
                     type="button"
-                    aria-label="Previous screenshot"
-                    title="Previous screenshot"
+                    aria-label="Previous media"
+                    title="Previous media"
                     data-gallery-previous
                   >
                     <ChevronLeft size={20} strokeWidth={2} aria-hidden="true" />
                   </button>
 
-                  <div class="project-gallery__dots" aria-label="Choose screenshot">
+                  <div class="project-gallery__dots" aria-label="Choose media">
                     {project.media.map((_, index) => (
                       <button
                         type="button"
-                        aria-label={`Show screenshot ${index + 1}`}
+                        aria-label={`Show media ${index + 1}`}
                         aria-current={index === 0 ? "true" : undefined}
                         data-gallery-dot={index}
                       />
                     ))}
                   </div>
 
-                  <span class="project-gallery__counter" aria-live="polite">
+                  <span class="project-gallery__counter" aria-live="off">
                     1 / {project.media.length}
                   </span>
 
                   <button
                     class="project-gallery__nav"
                     type="button"
-                    aria-label="Next screenshot"
-                    title="Next screenshot"
+                    aria-label="Next media"
+                    title="Next media"
                     data-gallery-next
                   >
                     <ChevronRight size={20} strokeWidth={2} aria-hidden="true" />
+                  </button>
+
+                  <button
+                    class="project-gallery__nav project-gallery__autoplay"
+                    type="button"
+                    aria-label="Pause slideshow"
+                    title="Pause slideshow"
+                    data-gallery-autoplay
+                  >
+                    <Pause
+                      size={18}
+                      strokeWidth={2}
+                      aria-hidden="true"
+                      data-gallery-pause-icon
+                    />
+                    <Play
+                      size={18}
+                      strokeWidth={2}
+                      aria-hidden="true"
+                      data-gallery-play-icon
+                      hidden
+                    />
                   </button>
                 </div>
               )}
@@ -191,21 +215,27 @@ const projectVisuals = {
             </section>
           </div>
 
-          <section class="project-detail__stack" aria-label="Technology stack">
-            <p class="project-detail__label">Stack</p>
-            <div class="project-detail__tools">
-              {project.tools.map((tool) => <span>{tool}</span>)}
-            </div>
-          </section>
+          <div class="project-detail__footer">
+            <section class="project-detail__stack" aria-label="Technology stack">
+              <p class="project-detail__label">Stack</p>
+              <div class="project-detail__tools">
+                {project.tools.map((tool) => <span>{tool}</span>)}
+              </div>
+            </section>
 
-          {project.url && (
-            <div class="project-detail__actions">
-              <a href={project.url} target="_blank" rel="noreferrer">
-                View project
-                <ExternalLink size={17} strokeWidth={2} aria-hidden="true" />
-              </a>
-            </div>
-          )}
+            {project.link && (
+              <div class="project-detail__actions">
+                <a
+                  href={project.link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {project.link.label}
+                  <ExternalLink size={17} strokeWidth={2} aria-hidden="true" />
+                </a>
+              </div>
+            )}
+          </div>
         </article>
       </template>
     ))
@@ -244,6 +274,7 @@ const projectVisuals = {
     "[data-project-open]",
   );
   let lastProjectTrigger: HTMLButtonElement | null = null;
+  let disposeProjectGallery: (() => void) | null = null;
 
   const initializeProjectGallery = () => {
     const gallery = projectContent?.querySelector<HTMLElement>(
@@ -264,13 +295,61 @@ const projectVisuals = {
     const nextButton = gallery.querySelector<HTMLButtonElement>(
       "[data-gallery-next]",
     );
+    const autoplayButton = gallery.querySelector<HTMLButtonElement>(
+      "[data-gallery-autoplay]",
+    );
+    const pauseIcon = gallery.querySelector<SVGElement>(
+      "[data-gallery-pause-icon]",
+    );
+    const playIcon = gallery.querySelector<SVGElement>(
+      "[data-gallery-play-icon]",
+    );
     const counter = gallery.querySelector<HTMLElement>(
       ".project-gallery__counter",
     );
     let activeIndex = 0;
     let slideRequest = 0;
+    let autoplayTimer: number | undefined;
+    let isAutoplayEnabled = true;
 
-    const showSlide = async (index: number) => {
+    const clearAutoplayTimer = () => {
+      if (autoplayTimer !== undefined) {
+        window.clearTimeout(autoplayTimer);
+        autoplayTimer = undefined;
+      }
+    };
+
+    const updateAutoplayControl = () => {
+      if (!autoplayButton) return;
+
+      const label = isAutoplayEnabled
+        ? "Pause slideshow"
+        : "Resume slideshow";
+
+      autoplayButton.setAttribute("aria-label", label);
+      autoplayButton.title = label;
+      if (pauseIcon) pauseIcon.hidden = !isAutoplayEnabled;
+      if (playIcon) playIcon.hidden = isAutoplayEnabled;
+      counter?.setAttribute(
+        "aria-live",
+        isAutoplayEnabled ? "off" : "polite",
+      );
+    };
+
+    const scheduleAutoplay = () => {
+      clearAutoplayTimer();
+
+      if (!isAutoplayEnabled || slides.length <= 1) return;
+      if (slides[activeIndex]?.querySelector("video")) return;
+
+      autoplayTimer = window.setTimeout(() => {
+        void showSlide(activeIndex + 1);
+      }, 5000);
+    };
+
+    async function showSlide(index: number) {
+      clearAutoplayTimer();
+
       const nextIndex = (index + slides.length) % slides.length;
       const request = ++slideRequest;
       const nextImage = slides[nextIndex]?.querySelector<HTMLImageElement>("img");
@@ -281,6 +360,7 @@ const projectVisuals = {
 
       if (request !== slideRequest) return;
 
+      const previousIndex = activeIndex;
       activeIndex = nextIndex;
 
       slides.forEach((slide, slideIndex) => {
@@ -288,8 +368,15 @@ const projectVisuals = {
       });
 
       gallery.querySelectorAll<HTMLVideoElement>("video").forEach((video) => {
-        if (video.closest<HTMLElement>("[data-gallery-slide]")?.hidden) {
+        const videoSlide = video.closest<HTMLElement>("[data-gallery-slide]");
+
+        if (videoSlide?.hidden) {
           video.pause();
+        } else if (isAutoplayEnabled && previousIndex !== activeIndex) {
+          video.currentTime = 0;
+          video.muted = false;
+          video.volume = 1;
+          video.play().catch(() => undefined);
         }
       });
 
@@ -302,7 +389,42 @@ const projectVisuals = {
       });
 
       if (counter) counter.textContent = `${activeIndex + 1} / ${slides.length}`;
-    };
+      scheduleAutoplay();
+    }
+
+    gallery.querySelectorAll<HTMLVideoElement>("video").forEach((video) => {
+      video.addEventListener("ended", () => {
+        const videoSlide = video.closest<HTMLElement>("[data-gallery-slide]");
+
+        if (isAutoplayEnabled && !videoSlide?.hidden) {
+          void showSlide(activeIndex + 1);
+        }
+      });
+    });
+
+    autoplayButton?.addEventListener("click", () => {
+      isAutoplayEnabled = !isAutoplayEnabled;
+      updateAutoplayControl();
+      clearAutoplayTimer();
+
+      const activeVideo = slides[activeIndex]?.querySelector<HTMLVideoElement>(
+        "video",
+      );
+
+      if (!isAutoplayEnabled) {
+        activeVideo?.pause();
+        return;
+      }
+
+      if (activeVideo) {
+        if (activeVideo.ended) activeVideo.currentTime = 0;
+        activeVideo.muted = false;
+        activeVideo.volume = 1;
+        activeVideo.play().catch(() => undefined);
+      } else {
+        scheduleAutoplay();
+      }
+    });
 
     previousButton?.addEventListener("click", () => {
       void showSlide(activeIndex - 1);
@@ -328,6 +450,17 @@ const projectVisuals = {
         void showSlide(activeIndex + 1);
       }
     });
+
+    updateAutoplayControl();
+
+    return () => {
+      isAutoplayEnabled = false;
+      slideRequest += 1;
+      clearAutoplayTimer();
+      gallery
+        .querySelectorAll<HTMLVideoElement>("video")
+        .forEach((video) => video.pause());
+    };
   };
 
   const closeProjectDialog = () => {
@@ -344,8 +477,9 @@ const projectVisuals = {
       if (!projectDialog || !projectContent || !template) return;
 
       lastProjectTrigger = trigger;
+      disposeProjectGallery?.();
       projectContent.replaceChildren(template.content.cloneNode(true));
-      initializeProjectGallery();
+      disposeProjectGallery = initializeProjectGallery() ?? null;
       document.body.classList.add("project-dialog-open");
       projectDialog.showModal();
 
@@ -368,6 +502,8 @@ const projectVisuals = {
   });
 
   projectDialog?.addEventListener("close", () => {
+    disposeProjectGallery?.();
+    disposeProjectGallery = null;
     projectContent
       ?.querySelectorAll<HTMLVideoElement>("video")
       .forEach((video) => video.pause());
