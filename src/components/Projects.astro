@@ -17,7 +17,7 @@ import SectionHeading from "./SectionHeading.astro";
 
 const projectVisuals = {
   "punch-ai": ScanLine,
-  "ai-workflows": BrainCircuit,
+  "dynalearn-gts": BrainCircuit,
   "personal-portfolio": PanelsTopLeft,
 };
 
@@ -210,7 +210,9 @@ const projectLinkIcons = {
           <div class="project-detail__body">
             <section>
               <p class="project-detail__label">Overview</p>
-              <p class="project-detail__overview">{project.overview}</p>
+              <div class="project-detail__overview">
+                {project.overview.map((paragraph) => <p>{paragraph}</p>)}
+              </div>
             </section>
 
             <section>

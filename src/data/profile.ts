@@ -97,8 +97,9 @@ export const profile = {
       category: "Mobile App",
       description:
         "An AI-powered boxing coach that turns training videos into practical, personalized feedback.",
-      overview:
+      overview: [
         "A Flutter mobile app that lets boxers record or import training sessions, receive AI-generated scores and coaching, and track progress across technique, speed, defense and footwork.",
+      ],
       highlights: [
         "Video-based boxing analysis",
         "AI-generated coaching insights",
@@ -128,19 +129,22 @@ export const profile = {
       ] satisfies ProjectLink[],
     },
     {
-      id: "ai-workflows",
-      title: "AI Workflows",
-      category: "Applied AI",
+      id: "dynalearn-gts",
+      title: "GtS Detection for DynaLearn",
+      category: "Learning Analytics",
       description:
-        "Designing data-driven systems that reduce manual work and improve output quality.",
-      overview:
-        "Designing applied AI workflows that combine automation with clear human review points to make complex work more efficient and dependable.",
-      highlights: [
-        "Workflow analysis",
-        "Human-in-the-loop design",
-        "Quality validation",
+        "An AI solution that detects trial-and-error behavior in DynaLearn action logs with a 0.983 F1-score.",
+      overview: [
+        "DynaLearn is an intelligent learning environment used by the Smart Education Lab in Dutch secondary schools. Students build and simulate qualitative models of physical, energy and climate processes to develop systems-thinking skills.",
+        "The research used 4–5 years of action logs from approximately 1,000 students. Educators observed Gaming the System behavior, which reduced meaningful engagement with the learning material.",
+        "I developed an AI solution that converts raw logs into eight-action sequences, represented with TF-IDF and n-grams and clustered with K-means for expert labeling. Random Forest outperformed SVM and Logistic Regression with an F1-score of 0.983. A dashboard prototype surfaces suspected moments, timestamps, action sequences and predicted GtS probabilities for educator review.",
       ],
-      tools: ["Python", "AI", "Automation"],
+      highlights: [
+        "Eight-action sequence modelling",
+        "Random Forest with a 0.983 F1-score",
+        "Educator dashboard for suspected behavior",
+      ],
+      tools: ["Python", "scikit-learn", "TF-IDF", "K-means", "Random Forest"],
       thumbnail: null as ProjectImage | null,
       media: [] as ProjectMedia[],
       compactGallery: false,
@@ -152,8 +156,9 @@ export const profile = {
       category: "Web Development",
       description:
         "Designing and building a responsive portfolio that presents my work, experience and skills with clarity.",
-      overview:
+      overview: [
         "A custom Astro portfolio focused on accessible interactions, responsive layouts and a maintainable, data-driven content structure.",
+      ],
       highlights: [
         "Responsive interface",
         "Fast, optimized performance",

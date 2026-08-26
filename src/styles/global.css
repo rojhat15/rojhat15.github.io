@@ -995,10 +995,15 @@ body.project-dialog-open {
 }
 
 .project-detail__overview {
-  margin: 0;
+  display: grid;
+  gap: 12px;
   color: var(--text);
   font-size: 18px;
   line-height: 1.5;
+}
+
+.project-detail__overview p {
+  margin: 0;
 }
 
 .project-detail__highlights {
