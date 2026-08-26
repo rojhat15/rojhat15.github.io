@@ -9,8 +9,8 @@ const personalPortfolioScreenshot: ProjectImage = {
 };
 
 const punchAiPreview: ProjectImage = {
-  src: "/images/projects/punch-ai-preview.png",
-  alt: "Punch AI mobile app showing boxing analytics, a weekly overview and training statistics",
+  src: "/images/projects/punch-ai-logo.png",
+  alt: "Punch AI logo with a red boxing glove inside a camera frame",
 };
 
 export const profile = {
