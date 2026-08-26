@@ -128,7 +128,7 @@ const projectVisuals = {
                         alt={media.alt}
                         width={media.width}
                         height={media.height}
-                        loading={index === 0 ? "eager" : "lazy"}
+                        loading="eager"
                         decoding="async"
                       />
                     )}
@@ -268,9 +268,20 @@ const projectVisuals = {
       ".project-gallery__counter",
     );
     let activeIndex = 0;
+    let slideRequest = 0;
 
-    const showSlide = (index: number) => {
-      activeIndex = (index + slides.length) % slides.length;
+    const showSlide = async (index: number) => {
+      const nextIndex = (index + slides.length) % slides.length;
+      const request = ++slideRequest;
+      const nextImage = slides[nextIndex]?.querySelector<HTMLImageElement>("img");
+
+      if (nextImage && !nextImage.complete) {
+        await nextImage.decode().catch(() => undefined);
+      }
+
+      if (request !== slideRequest) return;
+
+      activeIndex = nextIndex;
 
       slides.forEach((slide, slideIndex) => {
         slide.hidden = slideIndex !== activeIndex;
@@ -293,22 +304,28 @@ const projectVisuals = {
       if (counter) counter.textContent = `${activeIndex + 1} / ${slides.length}`;
     };
 
-    previousButton?.addEventListener("click", () => showSlide(activeIndex - 1));
-    nextButton?.addEventListener("click", () => showSlide(activeIndex + 1));
+    previousButton?.addEventListener("click", () => {
+      void showSlide(activeIndex - 1);
+    });
+    nextButton?.addEventListener("click", () => {
+      void showSlide(activeIndex + 1);
+    });
 
     dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => showSlide(index));
+      dot.addEventListener("click", () => {
+        void showSlide(index);
+      });
     });
 
     gallery.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        showSlide(activeIndex - 1);
+        void showSlide(activeIndex - 1);
       }
 
       if (event.key === "ArrowRight") {
         event.preventDefault();
-        showSlide(activeIndex + 1);
+        void showSlide(activeIndex + 1);
       }
     });
   };
