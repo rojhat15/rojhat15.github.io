@@ -113,10 +113,16 @@ export const profile = {
       thumbnail: punchAiPreview,
       media: punchAiMedia,
       compactGallery: false,
-      link: {
-        label: "View TikTok",
-        url: "https://www.tiktok.com/@punch.ai.app",
-      } satisfies ProjectLink,
+      links: [
+        {
+          label: "View TikTok",
+          url: "https://www.tiktok.com/@punch.ai.app",
+        },
+        {
+          label: "View App Store",
+          url: "https://apps.apple.com/nl/app/punch-ai/id6761296998",
+        },
+      ] satisfies ProjectLink[],
     },
     {
       id: "ai-workflows",
@@ -135,7 +141,7 @@ export const profile = {
       thumbnail: null as ProjectImage | null,
       media: [] as ProjectMedia[],
       compactGallery: false,
-      link: null as ProjectLink | null,
+      links: [] as ProjectLink[],
     },
     {
       id: "personal-portfolio",
@@ -154,7 +160,7 @@ export const profile = {
       thumbnail: personalPortfolioScreenshot,
       media: [personalPortfolioScreenshot],
       compactGallery: true,
-      link: null as ProjectLink | null,
+      links: [] as ProjectLink[],
     },
   ],
   experience: [

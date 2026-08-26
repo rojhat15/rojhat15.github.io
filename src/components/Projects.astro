@@ -223,16 +223,18 @@ const projectVisuals = {
               </div>
             </section>
 
-            {project.link && (
+            {project.links.length > 0 && (
               <div class="project-detail__actions">
-                <a
-                  href={project.link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {project.link.label}
-                  <ExternalLink size={17} strokeWidth={2} aria-hidden="true" />
-                </a>
+                {project.links.map((link) => (
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label}
+                    <ExternalLink size={17} strokeWidth={2} aria-hidden="true" />
+                  </a>
+                ))}
               </div>
             )}
           </div>
