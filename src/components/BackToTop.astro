@@ -1,0 +1,56 @@
+---
+import { ArrowUp } from "@lucide/astro";
+---
+
+<button
+  class="back-to-top"
+  type="button"
+  aria-label="Back to top"
+  aria-hidden="true"
+  title="Back to top"
+  tabindex="-1"
+  data-back-to-top
+>
+  <ArrowUp size={22} strokeWidth={2.2} aria-hidden="true" />
+</button>
+
+<script>
+  const backToTop = document.querySelector<HTMLButtonElement>(
+    "[data-back-to-top]",
+  );
+
+  if (backToTop) {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    let animationFrame: number | undefined;
+
+    const updateVisibility = () => {
+      animationFrame = undefined;
+      const threshold = Math.max(480, window.innerHeight * 0.65);
+      const isVisible = window.scrollY > threshold;
+
+      backToTop.classList.toggle("is-visible", isVisible);
+      backToTop.setAttribute("aria-hidden", String(!isVisible));
+      backToTop.tabIndex = isVisible ? 0 : -1;
+    };
+
+    const requestVisibilityUpdate = () => {
+      if (animationFrame !== undefined) return;
+      animationFrame = window.requestAnimationFrame(updateVisibility);
+    };
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    });
+
+    window.addEventListener("scroll", requestVisibilityUpdate, {
+      passive: true,
+    });
+    window.addEventListener("resize", requestVisibilityUpdate);
+    updateVisibility();
+  }
+</script>
