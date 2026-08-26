@@ -311,6 +311,11 @@ const projectVisuals = {
     let slideRequest = 0;
     let autoplayTimer: number | undefined;
     let isAutoplayEnabled = true;
+    let isTransitioning = false;
+    let activeAnimations: Animation[] = [];
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     const clearAutoplayTimer = () => {
       if (autoplayTimer !== undefined) {
@@ -343,14 +348,66 @@ const projectVisuals = {
       if (slides[activeIndex]?.querySelector("video")) return;
 
       autoplayTimer = window.setTimeout(() => {
-        void showSlide(activeIndex + 1);
+        void showSlide(activeIndex + 1, 1);
       }, 5000);
     };
 
-    async function showSlide(index: number) {
+    const animateSlideChange = async (
+      currentSlide: HTMLElement,
+      nextSlide: HTMLElement,
+      direction: -1 | 1,
+    ) => {
+      nextSlide.hidden = false;
+
+      if (prefersReducedMotion) {
+        currentSlide.hidden = true;
+        return;
+      }
+
+      const offset = 14 * direction;
+      const timing: KeyframeAnimationOptions = {
+        duration: 260,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "both",
+      };
+
+      activeAnimations = [
+        currentSlide.animate(
+          [
+            { opacity: 1, transform: "translateX(0)" },
+            { opacity: 0, transform: `translateX(${-offset}px)` },
+          ],
+          timing,
+        ),
+        nextSlide.animate(
+          [
+            { opacity: 0, transform: `translateX(${offset}px)` },
+            { opacity: 1, transform: "translateX(0)" },
+          ],
+          timing,
+        ),
+      ];
+
+      await Promise.allSettled(
+        activeAnimations.map((animation) => animation.finished),
+      );
+      activeAnimations.forEach((animation) => animation.cancel());
+      activeAnimations = [];
+      currentSlide.hidden = true;
+    };
+
+    async function showSlide(index: number, direction: -1 | 1 = 1) {
+      if (isTransitioning || slides.length <= 1) return;
+
       clearAutoplayTimer();
 
       const nextIndex = (index + slides.length) % slides.length;
+      if (nextIndex === activeIndex) {
+        scheduleAutoplay();
+        return;
+      }
+
+      isTransitioning = true;
       const request = ++slideRequest;
       const nextImage = slides[nextIndex]?.querySelector<HTMLImageElement>("img");
 
@@ -358,14 +415,27 @@ const projectVisuals = {
         await nextImage.decode().catch(() => undefined);
       }
 
-      if (request !== slideRequest) return;
+      if (request !== slideRequest) {
+        isTransitioning = false;
+        return;
+      }
 
       const previousIndex = activeIndex;
-      activeIndex = nextIndex;
+      const currentSlide = slides[previousIndex];
+      const nextSlide = slides[nextIndex];
 
-      slides.forEach((slide, slideIndex) => {
-        slide.hidden = slideIndex !== activeIndex;
-      });
+      currentSlide?.querySelector<HTMLVideoElement>("video")?.pause();
+
+      if (currentSlide && nextSlide) {
+        await animateSlideChange(currentSlide, nextSlide, direction);
+      }
+
+      if (request !== slideRequest) {
+        isTransitioning = false;
+        return;
+      }
+
+      activeIndex = nextIndex;
 
       gallery.querySelectorAll<HTMLVideoElement>("video").forEach((video) => {
         const videoSlide = video.closest<HTMLElement>("[data-gallery-slide]");
@@ -389,6 +459,7 @@ const projectVisuals = {
       });
 
       if (counter) counter.textContent = `${activeIndex + 1} / ${slides.length}`;
+      isTransitioning = false;
       scheduleAutoplay();
     }
 
@@ -397,7 +468,7 @@ const projectVisuals = {
         const videoSlide = video.closest<HTMLElement>("[data-gallery-slide]");
 
         if (isAutoplayEnabled && !videoSlide?.hidden) {
-          void showSlide(activeIndex + 1);
+          void showSlide(activeIndex + 1, 1);
         }
       });
     });
@@ -427,27 +498,27 @@ const projectVisuals = {
     });
 
     previousButton?.addEventListener("click", () => {
-      void showSlide(activeIndex - 1);
+      void showSlide(activeIndex - 1, -1);
     });
     nextButton?.addEventListener("click", () => {
-      void showSlide(activeIndex + 1);
+      void showSlide(activeIndex + 1, 1);
     });
 
     dots.forEach((dot, index) => {
       dot.addEventListener("click", () => {
-        void showSlide(index);
+        void showSlide(index, index < activeIndex ? -1 : 1);
       });
     });
 
     gallery.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        void showSlide(activeIndex - 1);
+        void showSlide(activeIndex - 1, -1);
       }
 
       if (event.key === "ArrowRight") {
         event.preventDefault();
-        void showSlide(activeIndex + 1);
+        void showSlide(activeIndex + 1, 1);
       }
     });
 
@@ -457,6 +528,8 @@ const projectVisuals = {
       isAutoplayEnabled = false;
       slideRequest += 1;
       clearAutoplayTimer();
+      activeAnimations.forEach((animation) => animation.cancel());
+      activeAnimations = [];
       gallery
         .querySelectorAll<HTMLVideoElement>("video")
         .forEach((video) => video.pause());
