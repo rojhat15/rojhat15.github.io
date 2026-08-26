@@ -130,7 +130,7 @@ export const profile = {
     },
     {
       id: "dynalearn-gts",
-      title: "GtS Detection for DynaLearn",
+      title: "Behavior Detection for DynaLearn",
       category: "Learning Analytics",
       description:
         "An AI solution that detects trial-and-error behavior in DynaLearn action logs with a 0.983 F1-score.",
