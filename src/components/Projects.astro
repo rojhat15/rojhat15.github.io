@@ -2,6 +2,8 @@
 import {
   ArrowUpRight,
   BrainCircuit,
+  ChevronLeft,
+  ChevronRight,
   ExternalLink,
   PanelsTopLeft,
   ScanLine,
@@ -40,8 +42,8 @@ const projectVisuals = {
                 <img
                   src={project.thumbnail.src}
                   alt=""
-                  width="1440"
-                  height="1000"
+                  width={project.thumbnail.width}
+                  height={project.thumbnail.height}
                   loading="lazy"
                   decoding="async"
                 />
@@ -87,26 +89,91 @@ const projectVisuals = {
             </div>
           </header>
 
-          {project.screenshots.length > 0 && (
+          {project.media.length > 0 && (
             <section
               class:list={[
                 "project-gallery",
+                `project-gallery--${project.id}`,
                 project.compactGallery && "project-gallery--compact",
               ]}
-              aria-label={`${project.title} screenshots`}
+              aria-label={`${project.title} media`}
+              aria-roledescription="carousel"
+              data-project-gallery
+              tabindex="0"
             >
-              {project.screenshots.map((screenshot) => (
-                <figure>
-                  <img
-                    src={screenshot.src}
-                    alt={screenshot.alt}
-                    width="1200"
-                    height="800"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </figure>
-              ))}
+              <div class="project-gallery__viewport">
+                {project.media.map((media, index) => (
+                  <figure
+                    class="project-gallery__slide"
+                    data-gallery-slide={index}
+                    role="group"
+                    aria-roledescription="slide"
+                    aria-label={`${index + 1} of ${project.media.length}`}
+                    hidden={index !== 0}
+                  >
+                    {media.type === "video" ? (
+                      <video
+                        src={media.src}
+                        poster={media.poster}
+                        aria-label={media.alt}
+                        width={media.width}
+                        height={media.height}
+                        controls
+                        playsinline
+                        preload="metadata"
+                      />
+                    ) : (
+                      <img
+                        src={media.src}
+                        alt={media.alt}
+                        width={media.width}
+                        height={media.height}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        decoding="async"
+                      />
+                    )}
+                  </figure>
+                ))}
+              </div>
+
+              {project.media.length > 1 && (
+                <div class="project-gallery__controls">
+                  <button
+                    class="project-gallery__nav"
+                    type="button"
+                    aria-label="Previous screenshot"
+                    title="Previous screenshot"
+                    data-gallery-previous
+                  >
+                    <ChevronLeft size={20} strokeWidth={2} aria-hidden="true" />
+                  </button>
+
+                  <div class="project-gallery__dots" aria-label="Choose screenshot">
+                    {project.media.map((_, index) => (
+                      <button
+                        type="button"
+                        aria-label={`Show screenshot ${index + 1}`}
+                        aria-current={index === 0 ? "true" : undefined}
+                        data-gallery-dot={index}
+                      />
+                    ))}
+                  </div>
+
+                  <span class="project-gallery__counter" aria-live="polite">
+                    1 / {project.media.length}
+                  </span>
+
+                  <button
+                    class="project-gallery__nav"
+                    type="button"
+                    aria-label="Next screenshot"
+                    title="Next screenshot"
+                    data-gallery-next
+                  >
+                    <ChevronRight size={20} strokeWidth={2} aria-hidden="true" />
+                  </button>
+                </div>
+              )}
             </section>
           )}
 
@@ -178,6 +245,74 @@ const projectVisuals = {
   );
   let lastProjectTrigger: HTMLButtonElement | null = null;
 
+  const initializeProjectGallery = () => {
+    const gallery = projectContent?.querySelector<HTMLElement>(
+      "[data-project-gallery]",
+    );
+
+    if (!gallery) return;
+
+    const slides = Array.from(
+      gallery.querySelectorAll<HTMLElement>("[data-gallery-slide]"),
+    );
+    const dots = Array.from(
+      gallery.querySelectorAll<HTMLButtonElement>("[data-gallery-dot]"),
+    );
+    const previousButton = gallery.querySelector<HTMLButtonElement>(
+      "[data-gallery-previous]",
+    );
+    const nextButton = gallery.querySelector<HTMLButtonElement>(
+      "[data-gallery-next]",
+    );
+    const counter = gallery.querySelector<HTMLElement>(
+      ".project-gallery__counter",
+    );
+    let activeIndex = 0;
+
+    const showSlide = (index: number) => {
+      activeIndex = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, slideIndex) => {
+        slide.hidden = slideIndex !== activeIndex;
+      });
+
+      gallery.querySelectorAll<HTMLVideoElement>("video").forEach((video) => {
+        if (video.closest<HTMLElement>("[data-gallery-slide]")?.hidden) {
+          video.pause();
+        }
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        if (dotIndex === activeIndex) {
+          dot.setAttribute("aria-current", "true");
+        } else {
+          dot.removeAttribute("aria-current");
+        }
+      });
+
+      if (counter) counter.textContent = `${activeIndex + 1} / ${slides.length}`;
+    };
+
+    previousButton?.addEventListener("click", () => showSlide(activeIndex - 1));
+    nextButton?.addEventListener("click", () => showSlide(activeIndex + 1));
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => showSlide(index));
+    });
+
+    gallery.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        showSlide(activeIndex - 1);
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        showSlide(activeIndex + 1);
+      }
+    });
+  };
+
   const closeProjectDialog = () => {
     projectDialog?.close();
   };
@@ -193,8 +328,19 @@ const projectVisuals = {
 
       lastProjectTrigger = trigger;
       projectContent.replaceChildren(template.content.cloneNode(true));
+      initializeProjectGallery();
       document.body.classList.add("project-dialog-open");
       projectDialog.showModal();
+
+      const openingVideo = projectContent.querySelector<HTMLVideoElement>(
+        "[data-gallery-slide]:not([hidden]) video",
+      );
+
+      if (openingVideo) {
+        openingVideo.muted = false;
+        openingVideo.volume = 1;
+        openingVideo.play().catch(() => undefined);
+      }
     });
   });
 
@@ -205,6 +351,9 @@ const projectVisuals = {
   });
 
   projectDialog?.addEventListener("close", () => {
+    projectContent
+      ?.querySelectorAll<HTMLVideoElement>("video")
+      .forEach((video) => video.pause());
     document.body.classList.remove("project-dialog-open");
     lastProjectTrigger?.focus();
   });

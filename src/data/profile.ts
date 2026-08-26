@@ -1,17 +1,76 @@
 type ProjectImage = {
+  type: "image";
   src: string;
   alt: string;
+  width: number;
+  height: number;
 };
 
+type ProjectVideo = {
+  type: "video";
+  src: string;
+  poster: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+type ProjectMedia = ProjectImage | ProjectVideo;
+
 const personalPortfolioScreenshot: ProjectImage = {
+  type: "image",
   src: "/images/projects/personal-portfolio-home.png",
   alt: "Personal portfolio homepage with profile card and Data Scientist introduction",
+  width: 1440,
+  height: 1000,
 };
 
 const punchAiPreview: ProjectImage = {
+  type: "image",
   src: "/images/projects/punch-ai-logo.png",
   alt: "Punch AI logo with a red boxing glove inside a camera frame",
+  width: 1024,
+  height: 1024,
 };
+
+const punchAiMedia: ProjectMedia[] = [
+  {
+    type: "video",
+    src: "/images/projects/punch-ai-motion-analysis.mp4",
+    poster: "/images/projects/punch-ai-motion-analysis-poster.webp",
+    alt: "Punch AI analyzing boxing movement during a training session",
+    width: 360,
+    height: 640,
+  },
+  {
+    type: "image",
+    src: "/images/projects/punch-ai-app-overview.webp",
+    alt: "Punch AI app overview displayed across three phones",
+    width: 1448,
+    height: 1086,
+  },
+  {
+    type: "image",
+    src: "/images/projects/punch-ai-home.webp",
+    alt: "Punch AI home screen with weekly scores and recent training sessions",
+    width: 852,
+    height: 1846,
+  },
+  {
+    type: "image",
+    src: "/images/projects/punch-ai-statistics.webp",
+    alt: "Punch AI statistics screen with lifetime and weekly training metrics",
+    width: 853,
+    height: 1844,
+  },
+  {
+    type: "image",
+    src: "/images/projects/punch-ai-session-analysis.webp",
+    alt: "Punch AI session analysis with punch breakdown and skill radar",
+    width: 1284,
+    height: 2778,
+  },
+];
 
 export const profile = {
   name: "Rojhat Yildirim",
@@ -47,7 +106,7 @@ export const profile = {
         "RevenueCat",
       ],
       thumbnail: punchAiPreview,
-      screenshots: [] as ProjectImage[],
+      media: punchAiMedia,
       compactGallery: false,
       url: null as string | null,
     },
@@ -66,7 +125,7 @@ export const profile = {
       ],
       tools: ["Python", "AI", "Automation"],
       thumbnail: null as ProjectImage | null,
-      screenshots: [] as ProjectImage[],
+      media: [] as ProjectMedia[],
       compactGallery: false,
       url: null as string | null,
     },
@@ -85,7 +144,7 @@ export const profile = {
       ],
       tools: ["Astro", "TypeScript", "CSS"],
       thumbnail: personalPortfolioScreenshot,
-      screenshots: [personalPortfolioScreenshot],
+      media: [personalPortfolioScreenshot],
       compactGallery: true,
       url: null as string | null,
     },
