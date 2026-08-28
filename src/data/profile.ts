@@ -18,7 +18,7 @@ type ProjectVideo = {
 type ProjectMedia = ProjectImage | ProjectVideo;
 
 type ProjectLink = {
-  icon: "apple" | "tiktok";
+  icon: "apple" | "external" | "tiktok";
   label: string;
   url: string;
 };
@@ -197,7 +197,13 @@ export const profile = {
       thumbnail: dynalearnPreview,
       media: dynalearnMedia,
       compactGallery: false,
-      links: [] as ProjectLink[],
+      links: [
+        {
+          icon: "external",
+          label: "View DynaLearn",
+          url: "https://dynalearn.nl/",
+        },
+      ] satisfies ProjectLink[],
     },
     {
       id: "personal-portfolio",

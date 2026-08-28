@@ -277,10 +277,18 @@ const projectLinkIcons = {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <BrandIcon
-                        icon={projectLinkIcons[link.icon].icon}
-                        size={projectLinkIcons[link.icon].size}
-                      />
+                      {link.icon === "external" ? (
+                        <ArrowUpRight
+                          size={20}
+                          strokeWidth={2}
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <BrandIcon
+                          icon={projectLinkIcons[link.icon].icon}
+                          size={projectLinkIcons[link.icon].size}
+                        />
+                      )}
                       {link.label}
                     </a>
                   ))}
