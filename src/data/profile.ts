@@ -86,6 +86,45 @@ const punchAiMedia: ProjectMedia[] = [
   },
 ];
 
+const dynalearnMedia: ProjectMedia[] = [
+  {
+    type: "video",
+    src: "/images/projects/dynalearn-tank-system-demo.mp4",
+    poster: "/images/projects/dynalearn-conceptual-model.png",
+    alt: "DynaLearn tank system conceptual model being edited and simulated",
+    width: 1980,
+    height: 1080,
+  },
+  {
+    type: "image",
+    src: "/images/projects/dynalearn-gts-dashboard.png",
+    alt: "Dashboard showing student progress and detected Gaming the System moments",
+    width: 1800,
+    height: 654,
+  },
+  {
+    type: "image",
+    src: "/images/projects/dynalearn-cluster-silhouette-score.png",
+    alt: "Silhouette scores across different numbers of K-means clusters",
+    width: 1800,
+    height: 923,
+  },
+  {
+    type: "image",
+    src: "/images/projects/dynalearn-dashboard-paper-prototype-1.jpg",
+    alt: "Paper prototype of student progress charts with suspected moments highlighted",
+    width: 1600,
+    height: 1162,
+  },
+  {
+    type: "image",
+    src: "/images/projects/dynalearn-dashboard-paper-prototype-2.jpg",
+    alt: "Paper prototype showing a Gaming the System alert with its pattern and probability",
+    width: 1600,
+    height: 1160,
+  },
+];
+
 export const profile = {
   name: "Rojhat Yildirim",
   role: "Data Scientist",
@@ -154,7 +193,7 @@ export const profile = {
       ],
       tools: ["Python", "scikit-learn", "TF-IDF", "K-means", "Random Forest"],
       thumbnail: dynalearnPreview,
-      media: [] as ProjectMedia[],
+      media: dynalearnMedia,
       compactGallery: false,
       links: [] as ProjectLink[],
     },
