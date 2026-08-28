@@ -140,6 +140,7 @@ export const profile = {
   projects: [
     {
       id: "punch-ai",
+      isExtra: false,
       title: "Punch AI",
       category: "Mobile App",
       description:
@@ -177,6 +178,7 @@ export const profile = {
     },
     {
       id: "dynalearn-gts",
+      isExtra: false,
       title: "Behavior Detection for DynaLearn",
       category: "Learning Analytics",
       description:
@@ -199,6 +201,7 @@ export const profile = {
     },
     {
       id: "personal-portfolio",
+      isExtra: false,
       title: "Personal Portfolio",
       category: "Web Development",
       description:
@@ -215,6 +218,20 @@ export const profile = {
       thumbnail: personalPortfolioScreenshot,
       media: [personalPortfolioScreenshot],
       compactGallery: true,
+      links: [] as ProjectLink[],
+    },
+    {
+      id: "halal-eats",
+      isExtra: true,
+      title: "Halal Eats",
+      category: "Project",
+      description: "More information about this project will be added soon.",
+      overview: ["More information about Halal Eats will be added soon."],
+      highlights: [] as string[],
+      tools: [] as string[],
+      thumbnail: null as ProjectImage | null,
+      media: [] as ProjectMedia[],
+      compactGallery: false,
       links: [] as ProjectLink[],
     },
   ],

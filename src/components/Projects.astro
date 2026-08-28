@@ -2,12 +2,14 @@
 import {
   ArrowUpRight,
   BrainCircuit,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   PanelsTopLeft,
   Pause,
   Play,
   ScanLine,
+  Utensils,
   X,
 } from "@lucide/astro";
 import { faApple, faTiktok } from "@fortawesome/free-brands-svg-icons";
@@ -18,6 +20,7 @@ import SectionHeading from "./SectionHeading.astro";
 const projectVisuals = {
   "punch-ai": ScanLine,
   "dynalearn-gts": BrainCircuit,
+  "halal-eats": Utensils,
   "personal-portfolio": PanelsTopLeft,
 };
 
@@ -30,14 +33,21 @@ const projectLinkIcons = {
 <section class="content-section" id="projects" data-reveal>
   <SectionHeading eyebrow="Selected work" title="Projects" />
 
-  <div class="project-list">
+  <div class="project-list" id="project-list">
     {
       profile.projects.map((project) => {
         const Icon =
           projectVisuals[project.id as keyof typeof projectVisuals];
 
         return (
-          <article class="project-card">
+          <article
+            class:list={[
+              "project-card",
+              project.isExtra && "project-card--extra",
+            ]}
+            data-extra-project={project.isExtra ? "true" : undefined}
+            hidden={project.isExtra}
+          >
             <div
               class:list={[
                 "project-card__visual",
@@ -85,6 +95,21 @@ const projectLinkIcons = {
       })
     }
   </div>
+
+  {
+    profile.projects.some((project) => project.isExtra) && (
+      <button
+        class="project-list__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="project-list"
+        data-project-toggle
+      >
+        <span data-project-toggle-label>View more</span>
+        <ChevronDown size={19} strokeWidth={2} aria-hidden="true" />
+      </button>
+    )
+  }
 
   {
     profile.projects.map((project) => (
@@ -207,7 +232,12 @@ const projectLinkIcons = {
             </section>
           )}
 
-          <div class="project-detail__body">
+          <div
+            class:list={[
+              "project-detail__body",
+              project.highlights.length === 0 && "project-detail__body--single",
+            ]}
+          >
             <section>
               <p class="project-detail__label">Overview</p>
               <div class="project-detail__overview">
@@ -215,40 +245,49 @@ const projectLinkIcons = {
               </div>
             </section>
 
-            <section>
-              <p class="project-detail__label">Focus</p>
-              <ul class="project-detail__highlights">
-                {project.highlights.map((highlight) => <li>{highlight}</li>)}
-              </ul>
-            </section>
-          </div>
-
-          <div class="project-detail__footer">
-            <section class="project-detail__stack" aria-label="Technology stack">
-              <p class="project-detail__label">Stack</p>
-              <div class="project-detail__tools">
-                {project.tools.map((tool) => <span>{tool}</span>)}
-              </div>
-            </section>
-
-            {project.links.length > 0 && (
-              <div class="project-detail__actions">
-                {project.links.map((link) => (
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <BrandIcon
-                      icon={projectLinkIcons[link.icon].icon}
-                      size={projectLinkIcons[link.icon].size}
-                    />
-                    {link.label}
-                  </a>
-                ))}
-              </div>
+            {project.highlights.length > 0 && (
+              <section>
+                <p class="project-detail__label">Focus</p>
+                <ul class="project-detail__highlights">
+                  {project.highlights.map((highlight) => <li>{highlight}</li>)}
+                </ul>
+              </section>
             )}
           </div>
+
+          {(project.tools.length > 0 || project.links.length > 0) && (
+            <div class="project-detail__footer">
+              {project.tools.length > 0 && (
+                <section
+                  class="project-detail__stack"
+                  aria-label="Technology stack"
+                >
+                  <p class="project-detail__label">Stack</p>
+                  <div class="project-detail__tools">
+                    {project.tools.map((tool) => <span>{tool}</span>)}
+                  </div>
+                </section>
+              )}
+
+              {project.links.length > 0 && (
+                <div class="project-detail__actions">
+                  {project.links.map((link) => (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <BrandIcon
+                        icon={projectLinkIcons[link.icon].icon}
+                        size={projectLinkIcons[link.icon].size}
+                      />
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </article>
       </template>
     ))
@@ -286,8 +325,31 @@ const projectLinkIcons = {
   const projectTriggers = document.querySelectorAll<HTMLButtonElement>(
     "[data-project-open]",
   );
+  const projectToggle = document.querySelector<HTMLButtonElement>(
+    "[data-project-toggle]",
+  );
+  const projectToggleLabel = projectToggle?.querySelector<HTMLElement>(
+    "[data-project-toggle-label]",
+  );
+  const extraProjects = document.querySelectorAll<HTMLElement>(
+    '[data-extra-project="true"]',
+  );
   let lastProjectTrigger: HTMLButtonElement | null = null;
   let disposeProjectGallery: (() => void) | null = null;
+
+  projectToggle?.addEventListener("click", () => {
+    const isExpanded = projectToggle.getAttribute("aria-expanded") === "true";
+    const nextExpanded = !isExpanded;
+
+    projectToggle.setAttribute("aria-expanded", String(nextExpanded));
+    extraProjects.forEach((project) => {
+      project.hidden = !nextExpanded;
+    });
+
+    if (projectToggleLabel) {
+      projectToggleLabel.textContent = nextExpanded ? "View less" : "View more";
+    }
+  });
 
   const initializeProjectGallery = () => {
     const gallery = projectContent?.querySelector<HTMLElement>(
