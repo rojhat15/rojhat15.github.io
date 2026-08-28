@@ -129,7 +129,7 @@ export const profile = {
   name: "Rojhat Yildirim",
   role: "Data Scientist",
   intro:
-    "I explore patterns, challenge assumptions and use data to build things that matter.",
+    "I use data and AI to make sense of complex problems and turn insight into solutions that work in practice.",
   headline:
     "Driven by curiosity, I use data, AI and business insight to uncover patterns, solve complex problems and create practical solutions that make a meaningful impact.",
   stats: [

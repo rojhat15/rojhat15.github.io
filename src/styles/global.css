@@ -282,18 +282,33 @@ select {
   margin: 0;
   color: var(--ink);
   font-family: "Poppins", sans-serif;
-  font-size: 36px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.04em;
   text-align: center;
 }
 
-.profile-card p:not(.eyebrow) {
-  margin: 124px 0 0;
-  color: #6d625b;
-  font-size: 14px;
-  line-height: 1.35;
+.profile-summary {
+  width: 100%;
+  max-width: 320px;
+  margin: 88px auto 0;
+  color: #5f554f;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.profile-summary::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 3px;
+  margin: 0 auto 16px;
+  border-radius: 2px;
+  background: var(--orange);
 }
 
 .profile-links {
@@ -1791,15 +1806,16 @@ body.project-dialog-open {
 
 @media (max-width: 420px) {
   .profile-card h2 {
-    font-size: 30px;
+    font-size: 32px;
   }
 
   .profile-card {
     min-height: 540px;
   }
 
-  .profile-card p:not(.eyebrow) {
-    margin-top: 78px;
+  .profile-summary {
+    margin-top: 48px;
+    font-size: 17px;
   }
 
   .focus-card h2 {
