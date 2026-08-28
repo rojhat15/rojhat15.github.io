@@ -328,12 +328,18 @@ export const profile = {
       relationshipRole: null,
     },
   ],
-  tools: [
+  skills: [
     "Python",
     "SQL",
-    "Machine Learning",
-    "Data Visualization",
-    "Analytics",
     "AI",
+    "Applications",
+    "Data Engineering",
+    "Data Analytics",
+    "Cloud Computing",
+    "Computer Vision",
+    "Automation",
+    "Research & Evaluation",
+    "Business Analysis",
+    "Project Management",
   ],
 };
