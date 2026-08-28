@@ -193,7 +193,7 @@ select {
 }
 
 .hero-section {
-  min-height: calc(100svh - 112px);
+  min-height: min(calc(100svh - 112px), 960px);
   padding: 0 0 80px;
   scroll-margin-top: 96px;
 }
