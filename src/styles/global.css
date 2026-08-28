@@ -239,8 +239,8 @@ select {
   height: 100%;
   display: block;
   object-fit: cover;
-  transform: scale(1.18);
-  transform-origin: 54% 56%;
+  transform: translateX(-12px) scale(1.18);
+  transform-origin: 54% 100%;
 }
 
 .profile-card__body {
