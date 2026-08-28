@@ -705,6 +705,16 @@ select {
   transform: scale(1.05);
 }
 
+.project-card__visual--dynalearn-gts img {
+  object-fit: cover;
+  object-position: 35% center;
+  transform: scale(1);
+}
+
+.project-card:hover .project-card__visual--dynalearn-gts img {
+  transform: scale(1.04);
+}
+
 .project-card__content {
   min-width: 0;
   align-self: center;

@@ -39,6 +39,14 @@ const punchAiPreview: ProjectImage = {
   height: 1024,
 };
 
+const dynalearnPreview: ProjectImage = {
+  type: "image",
+  src: "/images/projects/dynalearn-conceptual-model.png",
+  alt: "DynaLearn conceptual model showing the relationships between tank inflow, amount and height",
+  width: 1200,
+  height: 654,
+};
+
 const punchAiMedia: ProjectMedia[] = [
   {
     type: "video",
@@ -145,7 +153,7 @@ export const profile = {
         "Educator dashboard for suspected behavior",
       ],
       tools: ["Python", "scikit-learn", "TF-IDF", "K-means", "Random Forest"],
-      thumbnail: null as ProjectImage | null,
+      thumbnail: dynalearnPreview,
       media: [] as ProjectMedia[],
       compactGallery: false,
       links: [] as ProjectLink[],
