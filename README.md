@@ -38,11 +38,3 @@ The technologies and disciplines I work with, including Python, SQL, machine lea
 ## Contact
 
 Have a data, AI, or analytics challenge? Use the contact form on the website to get in touch.
-
-## Owner Reminder
-
-When the website is live:
-
-- Set **Restrict to Domain** in the Formspree form settings to the final production domain, without `https://`.
-- Keep CAPTCHA and spam protection enabled.
-- Send a test message from the live website and confirm that it reaches the correct email address.
