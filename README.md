@@ -17,7 +17,7 @@ I combine data, AI, and business insight to uncover patterns and turn them into 
 
 ## At a Glance
 
-- 6+ years of experience
+- 7+ years of experience
 - 32+ completed projects
 - 10+ coding languages and technologies
 

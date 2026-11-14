@@ -133,7 +133,7 @@ export const profile = {
   headline:
     "Driven by curiosity, I use data, AI and business insight to uncover patterns, solve complex problems and create practical solutions that make a meaningful impact.",
   stats: [
-    { value: "6+", label: "Years of experience" },
+    { value: "7+", label: "Years of experience" },
     { value: "32+", label: "Projects completed" },
     { value: "10+", label: "Coding languages" },
   ],
